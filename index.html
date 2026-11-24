@@ -6,8 +6,8 @@
     <meta name="theme-color" id="metaThemeColor" content="#4E6E58">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="PCOS & Study">
-    <title>PCOS Balance & Mục Tiêu – Sức khỏe, Ngoại ngữ & Tiết kiệm</title>
+    <meta name="apple-mobile-web-app-title" content="Cám's Routines">
+    <title>Cám's Routines – Sức khỏe, Ngoại ngữ & Tiết kiệm</title>
     <style>
         /* ============================================================
            1. BIẾN MÀU GIAO DIỆN: LIGHT MODE & DARK MODE (100% NỘI TUYẾN)
@@ -1434,9 +1434,9 @@
     <header class="app-header">
         <div class="header-inner">
             <div class="brand-box">
-                <div class="brand-logo" aria-hidden="true">🌿</div>
+                <div class="brand-logo" aria-hidden="true" style="background:linear-gradient(135deg, #D97706, #4E6E58);">✨</div>
                 <div>
-                    <div class="brand-title">PCOS Balance & Mục Tiêu</div>
+                    <div class="brand-title">Cám's Routines</div>
                     <div class="brand-sub" id="cloudSyncSubtitle">Lưu trữ cục bộ an toàn • Sẵn sàng</div>
                 </div>
             </div>
@@ -1454,6 +1454,7 @@
                     <span id="headerThemeLabel">Tự động</span>
                 </button>
 
+                <button type="button" class="btn btn-indigo-soft" data-action="open-goals-modal">🎯 Mục tiêu</button>
                 <button type="button" class="btn btn-sage-soft" data-action="open-modal" data-modal="syncAiModal">☁️ Đồng bộ & AI</button>
                 <button type="button" class="btn btn-amber-soft" data-action="open-modal" data-modal="pwaModal">📲 Cài App</button>
                 <button type="button" class="btn" data-action="export-backup">⬇️ Sao lưu</button>
@@ -1638,9 +1639,12 @@
                         <div class="card-header">
                             <div>
                                 <h2 class="card-title">⚖️ Chỉ số Cơ thể, Nước & Giấc ngủ</h2>
-                                <p class="card-subtitle">Lộ trình bền vững: <strong>65,6 kg → 57,0 kg</strong></p>
+                                <p class="card-subtitle" id="weightRoadmapSubtitle">Lộ trình bền vững: <strong>65,6 kg → 57,0 kg</strong></p>
                             </div>
-                            <span class="badge badge-sage" id="weightProgressBadge">Đã giảm 0,0 kg</span>
+                            <div class="row-flex" style="gap:5px;">
+                                <span class="badge badge-sage" id="weightProgressBadge">Đã giảm 0,0 kg</span>
+                                <button type="button" class="btn btn-sm" data-action="open-goals-modal" title="Sửa mục tiêu cân nặng & nước">✏️ Sửa</button>
+                            </div>
                         </div>
 
                         <div class="grid-2">
@@ -1658,7 +1662,7 @@
 
                         <div class="sub-box mt-2">
                             <div class="row-flex" style="justify-content:space-between;">
-                                <span class="text-xs font-bold">💧 Lượng nước uống: <strong id="waterMlText" style="color:var(--indigo); font-size:14px;">0</strong> / 2.000 ml</span>
+                                <span class="text-xs font-bold">💧 Lượng nước uống: <strong id="waterMlText" style="color:var(--indigo); font-size:14px;">0</strong> / <span id="waterGoalDisplay">2.000</span> ml</span>
                                 <div class="row-flex" style="gap:4px;">
                                     <button type="button" class="btn btn-sm btn-indigo-soft" data-action="add-water" data-ml="250">+250ml</button>
                                     <button type="button" class="btn btn-sm btn-indigo-soft" data-action="add-water" data-ml="500">+500ml</button>
@@ -1691,9 +1695,12 @@
                         <div class="card-header">
                             <div>
                                 <h2 class="card-title">👟 Bước chân & Nhật ký Vận động</h2>
-                                <p class="card-subtitle">Đi bộ 10–15p sau ăn giúp cơ bắp hút đường không cần nhiều insulin</p>
+                                <p class="card-subtitle">Mục tiêu: <strong id="stepsGoalSubtitle">7.500 bước/ngày</strong> • Đi bộ 10–15p sau ăn ổn định đường huyết</p>
                             </div>
-                            <span class="badge badge-sage" id="totalBurnedBadge">0 kcal tiêu hao</span>
+                            <div class="row-flex" style="gap:5px;">
+                                <span class="badge badge-sage" id="totalBurnedBadge">0 kcal tiêu hao</span>
+                                <button type="button" class="btn btn-sm" data-action="open-goals-modal" title="Sửa mục tiêu bước chân">✏️</button>
+                            </div>
                         </div>
 
                         <div class="sub-box">
@@ -1815,9 +1822,12 @@
                         <div class="row-flex" style="justify-content:space-between; margin-bottom:6px;">
                             <div>
                                 <span style="font-size:24px; font-weight:800;" id="studyTodayMinsVal">0</span>
-                                <span class="text-xs font-bold text-muted"> / 90–120 phút hôm nay (<span id="studyMinsSplitText">Anh: 0p • Trung: 0p</span>)</span>
+                                <span class="text-xs font-bold text-muted"> / <span id="studyDailyTargetDisplay">90–120</span> phút hôm nay (<span id="studyMinsSplitText">Anh: 0p • Trung: 0p</span>)</span>
                             </div>
-                            <button type="button" class="btn btn-sage" id="studySyncDoneBtn" data-action="toggle-study-done">✅ Hoàn thành buổi học</button>
+                            <div class="row-flex" style="gap:5px;">
+                                <button type="button" class="btn btn-sm" data-action="open-goals-modal" title="Chỉnh mục tiêu học tập & hạn thi">✏️ Mục tiêu</button>
+                                <button type="button" class="btn btn-sage" id="studySyncDoneBtn" data-action="toggle-study-done">✅ Hoàn thành buổi học</button>
+                            </div>
                         </div>
 
                         <div class="progress-track">
@@ -1825,7 +1835,7 @@
                         </div>
 
                         <div class="row-flex mt-2" style="justify-content:space-between;">
-                            <span class="text-xs text-muted">Mốc 90p: Đạt chuẩn • Mốc 120p: Bứt phá</span>
+                            <span class="text-xs text-muted" id="studyMinsMilestoneHint">Mốc đạt chuẩn: 90p • Mốc bứt phá: 120p</span>
                             <span class="text-xs font-extrabold" style="color:var(--amber);" id="studyWeekSessionsText">Tuần này: 0/6 buổi học</span>
                         </div>
                     </div>
@@ -1875,10 +1885,10 @@
                     <div class="card-header">
                         <div>
                             <div class="row-flex">
-                                <h2 class="card-title" style="color:var(--indigo-dark);">🇬🇧 Tiếng Anh TOEIC 850+</h2>
+                                <h2 class="card-title" style="color:var(--indigo-dark);" id="enCardHeading">🇬🇧 Tiếng Anh TOEIC 850+</h2>
                                 <span class="badge badge-indigo">Ngày lẻ</span>
                             </div>
-                            <p class="card-subtitle">Hiện tại: <strong>700</strong> → Mục tiêu: <strong>850+</strong> • Hạn: <strong>31/01/2027</strong></p>
+                            <p class="card-subtitle" id="enCardSubtitle">Xuất phát: <strong>700</strong> → Mục tiêu: <strong>850+</strong> • Hạn: <strong>31/01/2027</strong></p>
                         </div>
                         <div style="text-align:right;">
                             <span class="badge badge-amber" id="enDaysLeftBadge">Còn -- ngày</span>
@@ -1888,7 +1898,7 @@
 
                     <div class="sub-box" style="background:var(--indigo-light); border-color:var(--indigo-border);">
                         <div class="row-flex" style="justify-content:space-between; margin-bottom:5px;">
-                            <span class="text-xs font-bold">Điểm gần nhất: <strong style="color:var(--indigo-dark); font-size:14px;" id="enLatestScoreText">700</strong> / 850+</span>
+                            <span class="text-xs font-bold">Điểm gần nhất: <strong style="color:var(--indigo-dark); font-size:14px;" id="enLatestScoreText">700</strong> / <span id="enTargetScoreInline">850+</span></span>
                             <span class="text-xs font-bold" style="color:var(--indigo-dark);" id="enScoreGapBadge">Thiếu 150 điểm</span>
                         </div>
                         <div class="progress-track">
@@ -1963,7 +1973,7 @@
                                 <h2 class="card-title" style="color:var(--crimson-dark);">🇨🇳 Tiếng Trung HSK4 → HSK6</h2>
                                 <span class="badge badge-crimson">Ngày chẵn</span>
                             </div>
-                            <p class="card-subtitle">Mốc 1: <strong>HSK5 (03/2027)</strong> • Mốc 2: <strong>HSK6 (12/2027)</strong></p>
+                            <p class="card-subtitle" id="zhCardSubtitle">Mốc 1: <strong>HSK5 (03/2027)</strong> • Mốc 2: <strong>HSK6 (12/2027)</strong></p>
                         </div>
                         <div style="text-align:right;">
                             <span class="badge badge-amber" id="zhHsk5DaysBadge">HSK5: -- ngày</span>
@@ -1973,7 +1983,7 @@
 
                     <div class="sub-box" style="background:var(--crimson-light); border-color:var(--crimson-border);">
                         <div class="row-flex" style="justify-content:space-between; margin-bottom:5px;">
-                            <span class="text-xs font-bold">Vốn từ tích lũy: <strong style="color:var(--crimson-dark); font-size:14px;" id="zhCumVocabVal">1.200</strong> / 5.000 từ</span>
+                            <span class="text-xs font-bold">Vốn từ tích lũy: <strong style="color:var(--crimson-dark); font-size:14px;" id="zhCumVocabVal">1.200</strong> / <span id="zhTargetVocabDisplay">5.000</span> từ</span>
                             <div class="row-flex" style="gap:4px;">
                                 <button type="button" class="btn btn-sm btn-crimson-soft" data-action="add-zh-vocab" data-delta="20">+20 từ</button>
                                 <input type="number" id="zhCumVocabInput" class="input" style="width:74px; padding:4px 6px; font-weight:700; text-align:center;">
@@ -1984,8 +1994,8 @@
                         </div>
                         <div class="row-flex mt-1" style="justify-content:space-between; font-size:10.5px; color:var(--text-sub); font-weight:600;">
                             <span>HSK4 (1.200)</span>
-                            <span style="color:var(--amber-text);">🚩 HSK5: 2.500 từ (03/2027)</span>
-                            <span style="color:var(--crimson-dark);">🏆 HSK6: 5.000 từ (12/2027)</span>
+                            <span style="color:var(--amber-text);" id="zhMilestone1Label">🚩 HSK5: 2.500 từ (03/2027)</span>
+                            <span style="color:var(--crimson-dark);" id="zhMilestone2Label">🏆 HSK6: 5.000 từ (12/2027)</span>
                         </div>
                     </div>
 
@@ -2065,7 +2075,7 @@
                                 <h2 class="card-title" style="color:var(--amber-text);">🇰🇷 Tiếng Hàn (TOPIK & Giao tiếp)</h2>
                                 <span class="badge badge-amber">Bổ trợ</span>
                             </div>
-                            <p class="card-subtitle">Ghi nhận phút luyện nghe nói, từ vựng & ngữ pháp Hàn</p>
+                            <p class="card-subtitle" id="krGoalSubtitle">Mục tiêu: Giao tiếp & TOPIK • Hạn: Linh hoạt</p>
                         </div>
                         <div class="row-flex" style="gap:4px;">
                             <button type="button" class="btn btn-sm btn-amber-soft" data-action="quick-study-mins" data-lang="kr" data-mins="30">+30p</button>
@@ -2095,7 +2105,7 @@
                                 <h2 class="card-title" style="color:var(--pink);">🇯🇵 Tiếng Nhật (JLPT & Kanji)</h2>
                                 <span class="badge badge-pink">Bổ trợ</span>
                             </div>
-                            <p class="card-subtitle">Ghi nhận phút học chữ Hán (Kanji), từ vựng & nghe hiểu</p>
+                            <p class="card-subtitle" id="jaGoalSubtitle">Mục tiêu: JLPT & Kanji • Hạn: Linh hoạt</p>
                         </div>
                         <div class="row-flex" style="gap:4px;">
                             <button type="button" class="btn btn-sm btn-pink-soft" data-action="quick-study-mins" data-lang="ja" data-mins="30">+30p</button>
@@ -2493,7 +2503,7 @@
             <div class="sub-box" style="display:flex; align-items:center; gap:12px;">
                 <img id="generatedAppIconPreview" alt="App Icon" style="width:64px; height:64px; border-radius:16px; border:1px solid var(--border); flex-shrink:0;">
                 <div>
-                    <div class="font-extrabold text-sm">PCOS & Study App (PWA)</div>
+                    <div class="font-extrabold text-sm">Cám's Routines App (PWA)</div>
                     <div class="text-xs text-muted mt-1">Icon ứng dụng tự sinh sắc nét • Hoạt động mượt cả khi mất mạng</div>
                 </div>
             </div>
@@ -2635,6 +2645,132 @@
             <div class="row-flex mt-3" style="justify-content:flex-end;">
                 <button type="button" class="btn" data-action="close-modal" data-modal="confirmDeleteGoalModal">Giữ lại quỹ</button>
                 <button type="button" class="btn btn-crimson" data-action="confirm-delete-sav-goal">🗑️ Xác nhận xóa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 7: ALL GOALS CUSTOMIZER -->
+    <div id="goalsSettingsModal" class="modal-backdrop">
+        <div class="modal-box" style="max-width:560px;">
+            <div class="card-header">
+                <div>
+                    <h3 class="card-title">🎯 Tùy Chỉnh Toàn Bộ Mục Tiêu Cá Nhân</h3>
+                    <p class="card-subtitle">Sửa linh hoạt các mốc Sức khỏe & Học tập • Tự động lưu & đồng bộ 2 máy</p>
+                </div>
+                <button type="button" class="btn btn-sm" data-action="close-modal" data-modal="goalsSettingsModal">✕ Đóng</button>
+            </div>
+
+            <div class="sub-box">
+                <div class="text-xs font-extrabold mb-2" style="color:var(--sage-dark);">🌿 1. Mục tiêu Sức khỏe, Cân nặng & Vận động</div>
+                <div class="grid-3">
+                    <div>
+                        <label class="field-label">Cân xuất phát (kg)</label>
+                        <input type="number" id="goalStartWeightInput" class="input" step="0.1" min="30" max="200">
+                    </div>
+                    <div>
+                        <label class="field-label">Cân mục tiêu (kg)</label>
+                        <input type="number" id="goalTargetWeightInput" class="input" step="0.1" min="30" max="200">
+                    </div>
+                    <div>
+                        <label class="field-label">Calo / ngày (kcal)</label>
+                        <input type="number" id="goalDailyKcalInput" class="input" step="50" min="800" max="4000">
+                    </div>
+                </div>
+                <div class="grid-2 mt-2">
+                    <div>
+                        <label class="field-label">Nước uống / ngày (ml)</label>
+                        <input type="number" id="goalWaterMlInput" class="input" step="100" min="500" max="5000">
+                    </div>
+                    <div>
+                        <label class="field-label">Bước chân / ngày</label>
+                        <input type="number" id="goalDailyStepsInput" class="input" step="500" min="1000" max="50000">
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-box mt-3">
+                <div class="text-xs font-extrabold mb-2" style="color:var(--indigo-dark);">📚 2. Mục tiêu Thời lượng học & Tiếng Anh (TOEIC)</div>
+                <div class="grid-3">
+                    <div>
+                        <label class="field-label">Chuẩn phút/ngày</label>
+                        <input type="number" id="goalStudyMinMinsInput" class="input" step="5" min="15" max="480">
+                    </div>
+                    <div>
+                        <label class="field-label">Bứt phá phút/ngày</label>
+                        <input type="number" id="goalStudyMaxMinsInput" class="input" step="5" min="15" max="600">
+                    </div>
+                    <div>
+                        <label class="field-label">Buổi học / tuần</label>
+                        <input type="number" id="goalStudyWeekSessionsInput" class="input" min="1" max="14">
+                    </div>
+                </div>
+                <div class="grid-3 mt-2">
+                    <div>
+                        <label class="field-label">TOEIC xuất phát</label>
+                        <input type="number" id="goalEnStartScoreInput" class="input" step="5" min="10" max="990">
+                    </div>
+                    <div>
+                        <label class="field-label">TOEIC mục tiêu</label>
+                        <input type="number" id="goalEnTargetScoreInput" class="input" step="5" min="10" max="990">
+                    </div>
+                    <div>
+                        <label class="field-label">Hạn thi TOEIC</label>
+                        <input type="date" id="goalEnDeadlineInput" class="input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-box mt-3">
+                <div class="text-xs font-extrabold mb-2" style="color:var(--crimson-dark);">🇨🇳 3. Mục tiêu Tiếng Trung (HSK5 & HSK6)</div>
+                <div class="grid-2">
+                    <div>
+                        <label class="field-label">Từ vựng mốc HSK5</label>
+                        <input type="number" id="goalZhHsk5VocabInput" class="input" step="100" min="300" max="10000">
+                    </div>
+                    <div>
+                        <label class="field-label">Hạn thi HSK5</label>
+                        <input type="date" id="goalZhHsk5DeadlineInput" class="input">
+                    </div>
+                </div>
+                <div class="grid-2 mt-2">
+                    <div>
+                        <label class="field-label">Từ vựng mốc HSK6</label>
+                        <input type="number" id="goalZhHsk6VocabInput" class="input" step="100" min="500" max="15000">
+                    </div>
+                    <div>
+                        <label class="field-label">Hạn thi HSK6</label>
+                        <input type="date" id="goalZhHsk6DeadlineInput" class="input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-box mt-3">
+                <div class="text-xs font-extrabold mb-2" style="color:var(--amber-text);">🇰🇷🇯🇵 4. Mục tiêu Tiếng Hàn & Tiếng Nhật</div>
+                <div class="grid-2">
+                    <div>
+                        <label class="field-label">Mục tiêu Tiếng Hàn</label>
+                        <input type="text" id="goalKrTargetTextInput" class="input" placeholder="Vd: TOPIK II cấp 3">
+                    </div>
+                    <div>
+                        <label class="field-label">Hạn mục tiêu Hàn</label>
+                        <input type="date" id="goalKrDeadlineInput" class="input">
+                    </div>
+                </div>
+                <div class="grid-2 mt-2">
+                    <div>
+                        <label class="field-label">Mục tiêu Tiếng Nhật</label>
+                        <input type="text" id="goalJaTargetTextInput" class="input" placeholder="Vd: JLPT N4">
+                    </div>
+                    <div>
+                        <label class="field-label">Hạn mục tiêu Nhật</label>
+                        <input type="date" id="goalJaDeadlineInput" class="input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-flex mt-3" style="justify-content:flex-end;">
+                <button type="button" class="btn" data-action="close-modal" data-modal="goalsSettingsModal">Hủy</button>
+                <button type="button" class="btn btn-sage" data-action="save-all-goals">✅ Lưu tất cả mục tiêu</button>
             </div>
         </div>
     </div>
@@ -2799,10 +2935,21 @@
                 return {
                     activeMainTab: 'health',
                     overrideMode: 'auto',
+                    dailyMinMins: 90,
+                    dailyMaxMins: 120,
+                    weeklyTargetSessions: 6,
+                    enStartScore: 700,
+                    enTargetScore: 850,
                     enDeadline: '2027-01-31',
+                    zhHsk5VocabTarget: 2500,
                     zhHsk5Deadline: '2027-03-31',
+                    zhHsk6VocabTarget: 5000,
                     zhHsk6Deadline: '2027-12-31',
                     zhCumulativeVocab: 1200,
+                    krTargetLabel: 'Giao tiếp & TOPIK',
+                    krDeadline: '',
+                    jaTargetLabel: 'JLPT & Kanji',
+                    jaDeadline: '',
                     logsByDate: {},
                     enMockTests: [
                         { id: 'en_init', date: '2026-11-01', listening: 365, reading: 335, total: 700, note: 'Mốc xuất phát hiện tại' }
@@ -2860,6 +3007,8 @@
                 currentDate: getTodayStr(),
                 selectedMealSlot: 'lunch',
                 kcalGoal: 1400,
+                waterGoalMl: 2000,
+                stepsGoal: 7500,
                 startWeight: 65.6,
                 targetWeight: 57.0,
                 dailyTemplates: JSON.parse(JSON.stringify(DEFAULT_DAILY_HABITS)),
@@ -2994,6 +3143,10 @@
             function mergeStates(target, incoming, isRemoteAuthoritative = false) {
                 if (!incoming || typeof incoming !== 'object') return target;
                 if (typeof incoming.kcalGoal === 'number') target.kcalGoal = incoming.kcalGoal;
+                if (typeof incoming.waterGoalMl === 'number') target.waterGoalMl = incoming.waterGoalMl;
+                if (typeof incoming.stepsGoal === 'number') target.stepsGoal = incoming.stepsGoal;
+                if (typeof incoming.startWeight === 'number') target.startWeight = incoming.startWeight;
+                if (typeof incoming.targetWeight === 'number') target.targetWeight = incoming.targetWeight;
 
                 if (Array.isArray(incoming.dailyTemplates) && incoming.dailyTemplates.length > 0) {
                     const ids = new Set(target.dailyTemplates.map(t => t.id));
@@ -3055,6 +3208,20 @@
                     ensureStudy();
                     const sSt = incoming.study;
                     const dSt = target.study;
+                    if (typeof sSt.dailyMinMins === 'number') dSt.dailyMinMins = sSt.dailyMinMins;
+                    if (typeof sSt.dailyMaxMins === 'number') dSt.dailyMaxMins = sSt.dailyMaxMins;
+                    if (typeof sSt.weeklyTargetSessions === 'number') dSt.weeklyTargetSessions = sSt.weeklyTargetSessions;
+                    if (typeof sSt.enStartScore === 'number') dSt.enStartScore = sSt.enStartScore;
+                    if (typeof sSt.enTargetScore === 'number') dSt.enTargetScore = sSt.enTargetScore;
+                    if (typeof sSt.enDeadline === 'string') dSt.enDeadline = sSt.enDeadline;
+                    if (typeof sSt.zhHsk5VocabTarget === 'number') dSt.zhHsk5VocabTarget = sSt.zhHsk5VocabTarget;
+                    if (typeof sSt.zhHsk5Deadline === 'string') dSt.zhHsk5Deadline = sSt.zhHsk5Deadline;
+                    if (typeof sSt.zhHsk6VocabTarget === 'number') dSt.zhHsk6VocabTarget = sSt.zhHsk6VocabTarget;
+                    if (typeof sSt.zhHsk6Deadline === 'string') dSt.zhHsk6Deadline = sSt.zhHsk6Deadline;
+                    if (typeof sSt.krTargetLabel === 'string') dSt.krTargetLabel = sSt.krTargetLabel;
+                    if (typeof sSt.krDeadline === 'string') dSt.krDeadline = sSt.krDeadline;
+                    if (typeof sSt.jaTargetLabel === 'string') dSt.jaTargetLabel = sSt.jaTargetLabel;
+                    if (typeof sSt.jaDeadline === 'string') dSt.jaDeadline = sSt.jaDeadline;
                     if (typeof sSt.zhCumulativeVocab === 'number') {
                         dSt.zhCumulativeVocab = isRemoteAuthoritative ? sSt.zhCumulativeVocab : Math.max(dSt.zhCumulativeVocab || 1200, sSt.zhCumulativeVocab);
                     }
@@ -3239,14 +3406,14 @@
                 const text = rawPart.trim().toLowerCase();
                 let multiplier = 1;
 
-                const gramMatch = text.match(/(\d+(?:[.,]\d+)?)\s*(kg|g|gr|gram) /);
+                const gramMatch = text.match(/(\d+(?:[.,]\d+)?)\s*(kg|g|gr|gram)/);
                 if (gramMatch) {
                     let num = parseFloat(gramMatch[1].replace(',', '.'));
                     if (gramMatch[2] === 'kg') num *= 1000;
                     return { multiplier: num / 100, isGramBased: true };
                 }
 
-                const mlMatch = text.match(/(\d+(?:[.,]\d+)?)\s*ml /);
+                const mlMatch = text.match(/(\d+(?:[.,]\d+)?)\s*ml/);
                 if (mlMatch) {
                     const num = parseFloat(mlMatch[1].replace(',', '.'));
                     return { multiplier: num / 200, isGramBased: false };
@@ -3343,8 +3510,7 @@
                 const raw = input.value.trim();
                 if (!raw) return;
 
-                const parts = raw.split(/[,;
-]+/).map(s => s.trim()).filter(Boolean);
+                const parts = raw.split(/[,;\n]+/).map(s => s.trim()).filter(Boolean);
                 const day = ensureDay(appState.currentDate);
                 let addedCount = 0;
 
@@ -3700,11 +3866,14 @@
                     }
                 });
 
+                const minM = appState.study.dailyMinMins || 90;
+                const maxM = appState.study.dailyMaxMins || 120;
+                const enTgt = appState.study.enTargetScore || 850;
                 const labelsMap = {
-                    en: 'Học Tiếng Anh 90–120p: TOEIC 850+ Nghe/Đọc & Từ vựng',
-                    zh: 'Học Tiếng Trung 90–120p: Từ vựng HSK5→6 & Viết tóm tắt',
-                    kr: 'Học Tiếng Hàn: Từ vựng, Ngữ pháp & Luyện nghe nói',
-                    ja: 'Học Tiếng Nhật: Từ vựng, Kanji & Ngữ pháp JLPT'
+                    en: `Học Tiếng Anh ${minM}–${maxM}p: TOEIC ${enTgt}+ Nghe/Đọc & Từ vựng`,
+                    zh: `Học Tiếng Trung ${minM}–${maxM}p: Từ vựng HSK5→6 & Viết tóm tắt`,
+                    kr: `Học Tiếng Hàn ${minM}p: ${appState.study.krTargetLabel || 'Giao tiếp & TOPIK'}`,
+                    ja: `Học Tiếng Nhật ${minM}p: ${appState.study.jaTargetLabel || 'JLPT & Kanji'}`
                 };
 
                 const idx = appState.dailyTemplates.findIndex(t => t.id === activeId);
@@ -3716,7 +3885,7 @@
 
                 const log = ensureStudyLog(appState.currentDate);
                 const totalMins = (Number(log.en.minutes) || 0) + (Number(log.zh.minutes) || 0) + (Number(log.kr.minutes) || 0) + (Number(log.ja.minutes) || 0);
-                if (totalMins >= 90 && !day.dailyCompletedIds.includes(activeId)) {
+                if (totalMins >= (appState.study.dailyMinMins || 90) && !day.dailyCompletedIds.includes(activeId)) {
                     day.dailyCompletedIds.push(activeId);
                 }
 
@@ -3974,8 +4143,7 @@
                 ensureStudy();
                 const lesson = appState.study.vocabLessons.find(l => l.id === activeLessonFilter);
                 if (!lesson) return;
-                if (!confirm(`Xóa bài học "${lesson.name}"?
-(Các từ vựng bên trong vẫn được giữ nguyên và chuyển về mục "Chưa phân loại")`)) return;
+                if (!confirm(`Xóa bài học "${lesson.name}"?\n(Các từ vựng bên trong vẫn được giữ nguyên và chuyển về mục "Chưa phân loại")`)) return;
                 appState.study.vocabLessons = appState.study.vocabLessons.filter(l => l.id !== activeLessonFilter);
                 appState.study.vocabBank.forEach(c => {
                     if (c.lessonId === activeLessonFilter) c.lessonId = '';
@@ -4093,13 +4261,11 @@
                 }
 
                 ensureStudy();
-                const lines = raw.split(/
-?
-/).map(l => l.trim()).filter(Boolean);
+                const lines = raw.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
                 let added = 0;
 
                 lines.reverse().forEach(line => {
-                    let parts = line.split('	');
+                    let parts = line.split('\t');
                     if (parts.length < 2) {
                         const sepMatch = line.match(/^(.+?)\s*(?:[-–—:]|\|)\s*(.+)$/);
                         if (sepMatch) parts = [sepMatch[1], sepMatch[2]];
@@ -4148,9 +4314,8 @@
                         c.mastered ? 'Da thuoc' : 'Can on'
                     ]);
                 });
-                const csvBody = rows.map(r => r.map(cell => `"${String(cell || '').replace(/"/g, '""')}"`).join(',')).join('
-');
-                const blob = new Blob(['﻿' + csvBody], { type: 'text/csv;charset=utf-8;' });
+                const csvBody = rows.map(r => r.map(cell => `"${String(cell || '').replace(/"/g, '""')}"`).join(',')).join('\r\n');
+                const blob = new Blob(['\uFEFF' + csvBody], { type: 'text/csv;charset=utf-8;' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
@@ -4508,6 +4673,83 @@
             // ============================================================
             // 6. RENDER FUNCTIONS (ALL 3 TABS)
             // ============================================================
+            function openGoalsSettingsModal() {
+                ensureStudy();
+                document.getElementById('goalStartWeightInput').value = appState.startWeight || 65.6;
+                document.getElementById('goalTargetWeightInput').value = appState.targetWeight || 57.0;
+                document.getElementById('goalDailyKcalInput').value = appState.kcalGoal || 1400;
+                document.getElementById('goalWaterMlInput').value = appState.waterGoalMl || 2000;
+                document.getElementById('goalDailyStepsInput').value = appState.stepsGoal || 7500;
+
+                document.getElementById('goalStudyMinMinsInput').value = appState.study.dailyMinMins || 90;
+                document.getElementById('goalStudyMaxMinsInput').value = appState.study.dailyMaxMins || 120;
+                document.getElementById('goalStudyWeekSessionsInput').value = appState.study.weeklyTargetSessions || 6;
+
+                document.getElementById('goalEnStartScoreInput').value = appState.study.enStartScore || 700;
+                document.getElementById('goalEnTargetScoreInput').value = appState.study.enTargetScore || 850;
+                document.getElementById('goalEnDeadlineInput').value = appState.study.enDeadline || '2027-01-31';
+
+                document.getElementById('goalZhHsk5VocabInput').value = appState.study.zhHsk5VocabTarget || 2500;
+                document.getElementById('goalZhHsk5DeadlineInput').value = appState.study.zhHsk5Deadline || '2027-03-31';
+                document.getElementById('goalZhHsk6VocabInput').value = appState.study.zhHsk6VocabTarget || 5000;
+                document.getElementById('goalZhHsk6DeadlineInput').value = appState.study.zhHsk6Deadline || '2027-12-31';
+
+                document.getElementById('goalKrTargetTextInput').value = appState.study.krTargetLabel || 'Giao tiếp & TOPIK';
+                document.getElementById('goalKrDeadlineInput').value = appState.study.krDeadline || '';
+                document.getElementById('goalJaTargetTextInput').value = appState.study.jaTargetLabel || 'JLPT & Kanji';
+                document.getElementById('goalJaDeadlineInput').value = appState.study.jaDeadline || '';
+
+                openModal('goalsSettingsModal');
+            }
+
+            function saveAllGoalsFromModal() {
+                ensureStudy();
+                const sw = parseFloat(document.getElementById('goalStartWeightInput').value);
+                const tw = parseFloat(document.getElementById('goalTargetWeightInput').value);
+                const kc = parseInt(document.getElementById('goalDailyKcalInput').value, 10);
+                const wt = parseInt(document.getElementById('goalWaterMlInput').value, 10);
+                const st = parseInt(document.getElementById('goalDailyStepsInput').value, 10);
+
+                if (!isNaN(sw) && sw >= 30) appState.startWeight = sw;
+                if (!isNaN(tw) && tw >= 30) appState.targetWeight = tw;
+                if (!isNaN(kc) && kc >= 800) appState.kcalGoal = kc;
+                if (!isNaN(wt) && wt >= 500) appState.waterGoalMl = wt;
+                if (!isNaN(st) && st >= 1000) appState.stepsGoal = st;
+
+                const minM = parseInt(document.getElementById('goalStudyMinMinsInput').value, 10);
+                const maxM = parseInt(document.getElementById('goalStudyMaxMinsInput').value, 10);
+                const wkS = parseInt(document.getElementById('goalStudyWeekSessionsInput').value, 10);
+                if (!isNaN(minM) && minM >= 15) appState.study.dailyMinMins = minM;
+                if (!isNaN(maxM) && maxM >= 15) appState.study.dailyMaxMins = Math.max(appState.study.dailyMinMins, maxM);
+                if (!isNaN(wkS) && wkS >= 1) appState.study.weeklyTargetSessions = wkS;
+
+                const enStart = parseInt(document.getElementById('goalEnStartScoreInput').value, 10);
+                const enTarget = parseInt(document.getElementById('goalEnTargetScoreInput').value, 10);
+                const enDl = document.getElementById('goalEnDeadlineInput').value;
+                if (!isNaN(enStart) && enStart >= 10) appState.study.enStartScore = enStart;
+                if (!isNaN(enTarget) && enTarget >= 10) appState.study.enTargetScore = enTarget;
+                if (enDl) appState.study.enDeadline = enDl;
+
+                const zh5V = parseInt(document.getElementById('goalZhHsk5VocabInput').value, 10);
+                const zh5Dl = document.getElementById('goalZhHsk5DeadlineInput').value;
+                const zh6V = parseInt(document.getElementById('goalZhHsk6VocabInput').value, 10);
+                const zh6Dl = document.getElementById('goalZhHsk6DeadlineInput').value;
+                if (!isNaN(zh5V) && zh5V >= 100) appState.study.zhHsk5VocabTarget = zh5V;
+                if (zh5Dl) appState.study.zhHsk5Deadline = zh5Dl;
+                if (!isNaN(zh6V) && zh6V >= 100) appState.study.zhHsk6VocabTarget = zh6V;
+                if (zh6Dl) appState.study.zhHsk6Deadline = zh6Dl;
+
+                appState.study.krTargetLabel = document.getElementById('goalKrTargetTextInput').value.trim() || 'Giao tiếp & TOPIK';
+                appState.study.krDeadline = document.getElementById('goalKrDeadlineInput').value || '';
+                appState.study.jaTargetLabel = document.getElementById('goalJaTargetTextInput').value.trim() || 'JLPT & Kanji';
+                appState.study.jaDeadline = document.getElementById('goalJaDeadlineInput').value || '';
+
+                saveState();
+                renderAll();
+                closeModal('goalsSettingsModal');
+                showToast('🎯 Đã lưu & đồng bộ toàn bộ mục tiêu mới!');
+            }
+
             function renderAll() {
                 ensureStudy();
                 ensureSavings();
@@ -4705,16 +4947,26 @@
                     const sortedDays = Object.keys(appState.days).filter(d => d <= appState.currentDate && appState.days[d].weight).sort();
                     if (sortedDays.length > 0) latestW = appState.days[sortedDays[sortedDays.length - 1]].weight;
                 }
-                const curW = latestW || 65.6;
-                const lost = Math.round((65.6 - curW) * 10) / 10;
-                const left = Math.max(0, Math.round((curW - 57.0) * 10) / 10);
+                const startW = Number(appState.startWeight) || 65.6;
+                const targetW = Number(appState.targetWeight) || 57.0;
+                const waterGoal = Number(appState.waterGoalMl) || 2000;
+
+                const subWEl = document.getElementById('weightRoadmapSubtitle');
+                if (subWEl) subWEl.innerHTML = `Lộ trình bền vững: <strong>${startW.toFixed(1)} kg → ${targetW.toFixed(1)} kg</strong>`;
+                document.getElementById('weightInput').placeholder = startW.toFixed(1);
+
+                const curW = latestW || startW;
+                const lost = Math.round((startW - curW) * 10) / 10;
+                const left = Math.max(0, Math.round((curW - targetW) * 10) / 10);
 
                 document.getElementById('weightProgressBadge').textContent = lost >= 0 ? `Đã giảm ${lost.toFixed(1)} kg` : `Tăng ${Math.abs(lost).toFixed(1)} kg`;
-                document.getElementById('weightGoalDiffText').textContent = left > 0 ? `Mốc gần nhất ${curW}kg • Còn ${left.toFixed(1)}kg tới 57,0kg` : '🎉 Chúc mừng bạn đã đạt mốc 57,0 kg!';
+                document.getElementById('weightGoalDiffText').textContent = left > 0 ? `Mốc gần nhất ${curW}kg • Còn ${left.toFixed(1)}kg tới ${targetW.toFixed(1)}kg` : `🎉 Chúc mừng bạn đã đạt mốc ${targetW.toFixed(1)} kg!`;
 
                 const water = day.waterMl || 0;
                 document.getElementById('waterMlText').textContent = water.toLocaleString('vi-VN');
-                document.getElementById('waterProgressFill').style.width = `${Math.min(100, Math.round((water / 2000) * 100))}%`;
+                const wgDisp = document.getElementById('waterGoalDisplay');
+                if (wgDisp) wgDisp.textContent = waterGoal.toLocaleString('vi-VN');
+                document.getElementById('waterProgressFill').style.width = `${Math.min(100, Math.round((water / waterGoal) * 100))}%`;
             }
 
             function renderWorkoutsAndSteps() {
@@ -4730,13 +4982,16 @@
 
                 const chartEl = document.getElementById('steps7DayChart');
                 const days7 = Array.from({ length: 7 }, (_, idx) => offsetDateStr(appState.currentDate, idx - 6));
-                const maxSteps = Math.max(8000, ...days7.map(d => (appState.days[d] && appState.days[d].steps) || 0));
+                const stepsGoal = Number(appState.stepsGoal) || 7500;
+                const sgSub = document.getElementById('stepsGoalSubtitle');
+                if (sgSub) sgSub.textContent = `${stepsGoal.toLocaleString('vi-VN')} bước/ngày`;
+                const maxSteps = Math.max(stepsGoal + 500, ...days7.map(d => (appState.days[d] && appState.days[d].steps) || 0));
 
                 chartEl.innerHTML = days7.map(dStr => {
                     const st = (appState.days[dStr] && appState.days[dStr].steps) || 0;
                     const hPct = Math.max(6, Math.round((st / maxSteps) * 72));
                     const isToday = dStr === appState.currentDate;
-                    const metGoal = st >= 7500;
+                    const metGoal = st >= stepsGoal;
                     const shortVal = st >= 1000 ? `${(st / 1000).toFixed(1)}k` : (st > 0 ? st : '0');
                     return `
                         <div class="bar-col">
@@ -4872,12 +5127,19 @@
                 const curMeta = LANG_META[info.lang] || LANG_META.en;
                 document.getElementById('topSchedulePill').textContent = `📅 Lịch hôm nay: ${curMeta.label} (${totalMins}p)`;
 
+                const minM = Number(appState.study.dailyMinMins) || 90;
+                const maxM = Number(appState.study.dailyMaxMins) || 120;
+                const wkTargetSessions = Number(appState.study.weeklyTargetSessions) || 6;
+                const enStart = Number(appState.study.enStartScore) || 700;
+                const enTarget = Number(appState.study.enTargetScore) || 850;
+                const enDlStr = appState.study.enDeadline || '2027-01-31';
+
                 const pBadge = document.getElementById('studyParityBadge');
                 const fHead = document.getElementById('studyFocusHeading');
                 if (info.lang === 'en') {
                     pBadge.className = 'badge badge-indigo';
                     pBadge.textContent = info.isOdd ? 'Ngày lẻ • Ưu tiên Tiếng Anh' : 'Chọn thủ công • Tiếng Anh';
-                    fHead.textContent = 'Lịch học hôm nay: Tiếng Anh (TOEIC 700 → 850+)';
+                    fHead.textContent = `Lịch học hôm nay: Tiếng Anh (TOEIC ${enStart} → ${enTarget}+)`;
                 } else if (info.lang === 'zh') {
                     pBadge.className = 'badge badge-crimson';
                     pBadge.textContent = !info.isOdd ? 'Ngày chẵn • Ưu tiên Tiếng Trung' : 'Chọn thủ công • Tiếng Trung';
@@ -4885,11 +5147,11 @@
                 } else if (info.lang === 'kr') {
                     pBadge.className = 'badge badge-indigo';
                     pBadge.textContent = 'Chọn thủ công • Tiếng Hàn';
-                    fHead.textContent = 'Lịch học hôm nay: Tiếng Hàn (TOPIK & Giao tiếp)';
+                    fHead.textContent = `Lịch học hôm nay: Tiếng Hàn (${appState.study.krTargetLabel || 'TOPIK & Giao tiếp'})`;
                 } else {
                     pBadge.className = 'badge badge-pink';
                     pBadge.textContent = 'Chọn thủ công • Tiếng Nhật';
-                    fHead.textContent = 'Lịch học hôm nay: Tiếng Nhật (JLPT & Kanji)';
+                    fHead.textContent = `Lịch học hôm nay: Tiếng Nhật (${appState.study.jaTargetLabel || 'JLPT & Kanji'})`;
                 }
 
                 ['auto', 'en', 'zh', 'kr', 'ja'].forEach(m => {
@@ -4898,8 +5160,12 @@
                 });
 
                 document.getElementById('studyTodayMinsVal').textContent = totalMins;
+                const tgtDisp = document.getElementById('studyDailyTargetDisplay');
+                if (tgtDisp) tgtDisp.textContent = `${minM}–${maxM}`;
+                const hintDisp = document.getElementById('studyMinsMilestoneHint');
+                if (hintDisp) hintDisp.textContent = `Mốc đạt chuẩn: ${minM}p • Mốc bứt phá: ${maxM}p`;
                 document.getElementById('studyMinsSplitText').textContent = `Anh: ${enMins}p • Trung: ${zhMins}p • Hàn: ${krMins}p • Nhật: ${jaMins}p`;
-                const pctMins = Math.min(100, Math.round((totalMins / 120) * 100));
+                const pctMins = Math.min(100, Math.round((totalMins / Math.max(1, maxM)) * 100));
                 const sBar = document.getElementById('studyMinsBar');
                 sBar.style.width = `${pctMins}%`;
                 sBar.className = info.lang === 'zh' ? 'progress-fill crimson' : 'progress-fill indigo';
@@ -4916,22 +5182,30 @@
                     const dL = appState.study.logsByDate[offsetDateStr(monStr, i)];
                     if (dL) {
                         const daySum = (Number(dL.en && dL.en.minutes) || 0) + (Number(dL.zh && dL.zh.minutes) || 0) + (Number(dL.kr && dL.kr.minutes) || 0) + (Number(dL.ja && dL.ja.minutes) || 0);
-                        if (daySum >= 45) sessions++;
+                        if (daySum >= Math.min(45, minM)) sessions++;
                     }
                 }
-                document.getElementById('studyWeekSessionsText').textContent = `Tuần này: ${sessions}/6 buổi học`;
+                document.getElementById('studyWeekSessionsText').textContent = `Tuần này: ${sessions}/${wkTargetSessions} buổi học`;
 
-                const enDays = calcDaysLeft(appState.study.enDeadline || '2027-01-31');
+                const enDays = calcDaysLeft(enDlStr);
                 const enWeeks = Math.max(1, Math.ceil(enDays / 7));
                 document.getElementById('enDaysLeftBadge').textContent = `Còn ${enDays} ngày (${enWeeks} tuần)`;
 
+                const enHeadEl = document.getElementById('enCardHeading');
+                if (enHeadEl) enHeadEl.textContent = `🇬🇧 Tiếng Anh TOEIC ${enTarget}+`;
+                const enSubEl = document.getElementById('enCardSubtitle');
+                if (enSubEl) enSubEl.innerHTML = `Xuất phát: <strong>${enStart}</strong> → Mục tiêu: <strong>${enTarget}+</strong> • Hạn: <strong>${enDlStr.split('-').reverse().join('/')}</strong>`;
+                const enTgtInline = document.getElementById('enTargetScoreInline');
+                if (enTgtInline) enTgtInline.textContent = `${enTarget}+`;
+
                 const sortedEn = [...appState.study.enMockTests].sort((a, b) => a.date.localeCompare(b.date));
-                const curEn = sortedEn.length > 0 ? sortedEn[sortedEn.length - 1].total : 700;
-                const enGap = Math.max(0, 850 - curEn);
-                const enPct = Math.min(100, Math.max(0, Math.round(((curEn - 700) / 150) * 100)));
+                const curEn = sortedEn.length > 0 ? sortedEn[sortedEn.length - 1].total : enStart;
+                const enGap = Math.max(0, enTarget - curEn);
+                const spanScore = Math.max(10, enTarget - enStart);
+                const enPct = Math.min(100, Math.max(0, Math.round(((curEn - enStart) / spanScore) * 100)));
 
                 document.getElementById('enLatestScoreText').textContent = curEn;
-                document.getElementById('enScoreGapBadge').textContent = enGap > 0 ? `Thiếu ${enGap} điểm` : 'Đạt 850+ 🎉';
+                document.getElementById('enScoreGapBadge').textContent = enGap > 0 ? `Thiếu ${enGap} điểm` : `Đạt ${enTarget}+ 🎉`;
                 document.getElementById('enScoreBar').style.width = `${enPct}%`;
                 document.getElementById('enWeeklyRateText').textContent = enGap > 0 ? `Cần +${Math.ceil(enGap / enWeeks)}đ/tuần` : 'Vượt mục tiêu!';
 
@@ -4963,15 +5237,42 @@
                     </div>
                 `).join('');
 
-                const d5 = calcDaysLeft(appState.study.zhHsk5Deadline || '2027-03-31');
-                const d6 = calcDaysLeft(appState.study.zhHsk6Deadline || '2027-12-31');
-                document.getElementById('zhHsk5DaysBadge').textContent = `HSK5 (03/27): ${d5} ngày`;
-                document.getElementById('zhHsk6DaysBadge').textContent = `HSK6 (12/27): ${d6} ngày`;
+                const zh5Dl = appState.study.zhHsk5Deadline || '2027-03-31';
+                const zh6Dl = appState.study.zhHsk6Deadline || '2027-12-31';
+                const zh5Vocab = Number(appState.study.zhHsk5VocabTarget) || 2500;
+                const zh6Vocab = Number(appState.study.zhHsk6VocabTarget) || 5000;
+                const d5 = calcDaysLeft(zh5Dl);
+                const d6 = calcDaysLeft(zh6Dl);
+                const zh5Short = `${zh5Dl.slice(5, 7)}/${zh5Dl.slice(2, 4)}`;
+                const zh6Short = `${zh6Dl.slice(5, 7)}/${zh6Dl.slice(2, 4)}`;
+
+                const zhSub = document.getElementById('zhCardSubtitle');
+                if (zhSub) zhSub.innerHTML = `Mốc 1: <strong>HSK5 (${zh5Short})</strong> • Mốc 2: <strong>HSK6 (${zh6Short})</strong>`;
+                document.getElementById('zhHsk5DaysBadge').textContent = `HSK5 (${zh5Short}): ${d5} ngày`;
+                document.getElementById('zhHsk6DaysBadge').textContent = `HSK6 (${zh6Short}): ${d6} ngày`;
+
+                const zhTgtDisp = document.getElementById('zhTargetVocabDisplay');
+                if (zhTgtDisp) zhTgtDisp.textContent = zh6Vocab.toLocaleString('vi-VN');
+                const zhM1 = document.getElementById('zhMilestone1Label');
+                if (zhM1) zhM1.textContent = `🚩 HSK5: ${zh5Vocab.toLocaleString('vi-VN')} từ (${zh5Short})`;
+                const zhM2 = document.getElementById('zhMilestone2Label');
+                if (zhM2) zhM2.textContent = `🏆 HSK6: ${zh6Vocab.toLocaleString('vi-VN')} từ (${zh6Short})`;
 
                 const cumV = Number(appState.study.zhCumulativeVocab) || 1200;
                 document.getElementById('zhCumVocabVal').textContent = cumV.toLocaleString('vi-VN');
                 document.getElementById('zhCumVocabInput').value = cumV;
-                document.getElementById('zhVocabBar').style.width = `${Math.min(100, Math.round((cumV / 5000) * 100))}%`;
+                document.getElementById('zhVocabBar').style.width = `${Math.min(100, Math.round((cumV / Math.max(1, zh6Vocab)) * 100))}%`;
+
+                const krSub = document.getElementById('krGoalSubtitle');
+                if (krSub) {
+                    const krDlTxt = appState.study.krDeadline ? ` • Hạn: ${appState.study.krDeadline.split('-').reverse().join('/')} (${calcDaysLeft(appState.study.krDeadline)} ngày)` : '';
+                    krSub.textContent = `Mục tiêu: ${appState.study.krTargetLabel || 'Giao tiếp & TOPIK'}${krDlTxt}`;
+                }
+                const jaSub = document.getElementById('jaGoalSubtitle');
+                if (jaSub) {
+                    const jaDlTxt = appState.study.jaDeadline ? ` • Hạn: ${appState.study.jaDeadline.split('-').reverse().join('/')} (${calcDaysLeft(appState.study.jaDeadline)} ngày)` : '';
+                    jaSub.textContent = `Mục tiêu: ${appState.study.jaTargetLabel || 'JLPT & Kanji'}${jaDlTxt}`;
+                }
 
                 document.getElementById('zhMinsInput').value = log.zh.minutes || '';
                 document.getElementById('zhVocabInput').value = log.zh.vocab || '';
@@ -5592,7 +5893,8 @@
                     const ctx = canvas.getContext('2d');
 
                     const grad = ctx.createLinearGradient(0, 0, 512, 512);
-                    grad.addColorStop(0, '#4E6E58');
+                    grad.addColorStop(0, '#D97706');
+                    grad.addColorStop(0.55, '#4E6E58');
                     grad.addColorStop(1, '#2D4A36');
                     ctx.fillStyle = grad;
                     if (ctx.roundRect) {
@@ -5612,11 +5914,12 @@
                     ctx.font = 'bold 130px -apple-system, BlinkMacSystemFont, sans-serif';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText('🌿', 256, 232);
+                    ctx.fillText('✨', 256, 232);
 
                     ctx.fillStyle = '#FFFFFF';
                     ctx.font = '800 46px -apple-system, BlinkMacSystemFont, sans-serif';
-                    ctx.fillText('PCOS & STUDY', 256, 405);
+                    ctx.font = '800 40px -apple-system, BlinkMacSystemFont, sans-serif';
+                    ctx.fillText("CÁM'S ROUTINES", 256, 405);
 
                     const iconDataUrl = canvas.toDataURL('image/png');
                     const previewImg = document.getElementById('generatedAppIconPreview');
@@ -5629,8 +5932,8 @@
                     document.head.appendChild(appleLink);
 
                     const manifest = {
-                        name: 'PCOS Balance & Mục Tiêu – Sức khỏe, Ngoại ngữ & Tiết kiệm',
-                        short_name: 'PCOS & Study',
+                        name: "Cám's Routines – Sức khỏe, Ngoại ngữ & Tiết kiệm",
+                        short_name: "Cám's Routines",
                         start_url: './',
                         display: 'standalone',
                         background_color: '#FAF8F5',
@@ -5731,6 +6034,12 @@
                             break;
                         case 'open-modal':
                             openModal(btn.dataset.modal);
+                            break;
+                        case 'open-goals-modal':
+                            openGoalsSettingsModal();
+                            break;
+                        case 'save-all-goals':
+                            saveAllGoalsFromModal();
                             break;
                         case 'close-modal':
                             closeModal(btn.dataset.modal);
