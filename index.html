@@ -1179,6 +1179,85 @@
             border-color: var(--crimson-border);
         }
 
+        .excel-lang-pill.kr {
+            background: var(--amber-light);
+            color: var(--amber-text);
+            border-color: var(--amber-border);
+        }
+
+        .excel-lang-pill.ja {
+            background: var(--pink-light);
+            color: var(--pink);
+            border-color: var(--pink-border);
+        }
+
+        .lesson-bar-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 9px 11px;
+            margin-bottom: 10px;
+        }
+
+        .lesson-pills-scroll {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            align-items: center;
+            flex: 1;
+        }
+
+        .lesson-pill {
+            border: 1px solid var(--border-strong);
+            background: var(--surface);
+            color: var(--text-sub);
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .lesson-pill:hover {
+            border-color: var(--sage);
+            color: var(--text-main);
+        }
+
+        .lesson-pill.active {
+            background: var(--sage);
+            color: #FFFFFF;
+            border-color: var(--sage);
+        }
+
+        [data-theme="dark"] .lesson-pill.active {
+            color: #101913;
+        }
+
+        .excel-lesson-select {
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: var(--text-sub);
+            font-family: inherit;
+            font-size: 11.5px;
+            font-weight: 600;
+            padding: 6px 4px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .excel-lesson-select:focus {
+            background: var(--surface);
+            color: var(--text-main);
+        }
+
         /* SAVINGS GOAL CARDS */
         .savings-goal-card {
             background: var(--surface);
@@ -1630,7 +1709,8 @@
                                 </div>
                             </div>
                             <div class="row-flex mt-2">
-                                <input type="number" id="stepsManualInput" class="input" placeholder="Nhập trực tiếp số bước chân..." min="0" max="100000">
+                                <input type="number" id="stepsManualInput" class="input" style="flex:1;" placeholder="Nhập trực tiếp số bước chân..." min="0" max="100000">
+                                <button type="button" class="btn btn-sage" data-action="save-manual-steps">Lưu</button>
                             </div>
 
                             <div id="steps7DayChart" class="bar-chart-7d"></div>
@@ -1726,6 +1806,8 @@
                             <button type="button" class="btn btn-sm" id="ovBtn_auto" data-action="study-override" data-mode="auto">Tự động</button>
                             <button type="button" class="btn btn-sm" id="ovBtn_en" data-action="study-override" data-mode="en">🇬🇧 Anh</button>
                             <button type="button" class="btn btn-sm" id="ovBtn_zh" data-action="study-override" data-mode="zh">🇨🇳 Trung</button>
+                            <button type="button" class="btn btn-sm" id="ovBtn_kr" data-action="study-override" data-mode="kr">🇰🇷 Hàn</button>
+                            <button type="button" class="btn btn-sm" id="ovBtn_ja" data-action="study-override" data-mode="ja">🇯🇵 Nhật</button>
                         </div>
                     </div>
 
@@ -1759,6 +1841,8 @@
                         <select id="pomoLangSelect" class="select" style="width:auto; background:rgba(255,255,255,0.16); color:#fff; border-color:rgba(255,255,255,0.3); font-weight:700;">
                             <option value="en" style="color:#1F2933;">🇬🇧 Tiếng Anh</option>
                             <option value="zh" style="color:#1F2933;">🇨🇳 Tiếng Trung</option>
+                            <option value="kr" style="color:#1F2933;">🇰🇷 Tiếng Hàn</option>
+                            <option value="ja" style="color:#1F2933;">🇯🇵 Tiếng Nhật</option>
                         </select>
                     </div>
 
@@ -1972,12 +2056,75 @@
                 </section>
             </div>
 
-            <!-- 3. EXCEL 2-COLUMN VOCABULARY TABLE -->
+            <!-- 2B. KOREAN & JAPANESE STUDY LOGS -->
+            <div class="study-grid" style="margin-bottom:16px;">
+                <section class="card" style="border-color:var(--amber-border);">
+                    <div class="card-header" style="margin-bottom:10px;">
+                        <div>
+                            <div class="row-flex">
+                                <h2 class="card-title" style="color:var(--amber-text);">🇰🇷 Tiếng Hàn (TOPIK & Giao tiếp)</h2>
+                                <span class="badge badge-amber">Bổ trợ</span>
+                            </div>
+                            <p class="card-subtitle">Ghi nhận phút luyện nghe nói, từ vựng & ngữ pháp Hàn</p>
+                        </div>
+                        <div class="row-flex" style="gap:4px;">
+                            <button type="button" class="btn btn-sm btn-amber-soft" data-action="quick-study-mins" data-lang="kr" data-mins="30">+30p</button>
+                            <button type="button" class="btn btn-sm btn-amber-soft" data-action="quick-study-mins" data-lang="kr" data-mins="60">+60p</button>
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div>
+                            <label class="field-label">Phút học hôm nay</label>
+                            <input type="number" id="krMinsInput" class="input" min="0" max="600" placeholder="45">
+                        </div>
+                        <div>
+                            <label class="field-label">Số từ vựng / Mẫu câu</label>
+                            <input type="number" id="krVocabInput" class="input" min="0" max="500" placeholder="15">
+                        </div>
+                    </div>
+                    <div class="row-flex mt-2">
+                        <input type="text" id="krNoteInput" class="input" style="flex:1;" placeholder="Ghi chú bài học tiếng Hàn (vd: Bài 5 - Đuôi câu lịch sự, từ vựng công sở...)">
+                        <button type="button" class="btn btn-amber-soft" style="font-weight:700;" data-action="save-study-log" data-lang="kr">Lưu</button>
+                    </div>
+                </section>
+
+                <section class="card" style="border-color:var(--pink-border);">
+                    <div class="card-header" style="margin-bottom:10px;">
+                        <div>
+                            <div class="row-flex">
+                                <h2 class="card-title" style="color:var(--pink);">🇯🇵 Tiếng Nhật (JLPT & Kanji)</h2>
+                                <span class="badge badge-pink">Bổ trợ</span>
+                            </div>
+                            <p class="card-subtitle">Ghi nhận phút học chữ Hán (Kanji), từ vựng & nghe hiểu</p>
+                        </div>
+                        <div class="row-flex" style="gap:4px;">
+                            <button type="button" class="btn btn-sm btn-pink-soft" data-action="quick-study-mins" data-lang="ja" data-mins="30">+30p</button>
+                            <button type="button" class="btn btn-sm btn-pink-soft" data-action="quick-study-mins" data-lang="ja" data-mins="60">+60p</button>
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div>
+                            <label class="field-label">Phút học hôm nay</label>
+                            <input type="number" id="jaMinsInput" class="input" min="0" max="600" placeholder="45">
+                        </div>
+                        <div>
+                            <label class="field-label">Từ vựng / Kanji mới</label>
+                            <input type="number" id="jaVocabInput" class="input" min="0" max="500" placeholder="15">
+                        </div>
+                    </div>
+                    <div class="row-flex mt-2">
+                        <input type="text" id="jaNoteInput" class="input" style="flex:1;" placeholder="Ghi chú bài học tiếng Nhật (vd: Minna bài 8, Kanji bộ Nhân, trợ từ...)">
+                        <button type="button" class="btn btn-pink-soft" style="font-weight:700;" data-action="save-study-log" data-lang="ja">Lưu</button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 3. EXCEL 2-COLUMN VOCABULARY TABLE BY LESSON -->
             <section class="card">
                 <div class="card-header">
                     <div>
-                        <h2 class="card-title">📊 Bảng Từ Vựng 2 Cột (Dạng Excel)</h2>
-                        <p class="card-subtitle">Gõ từ → bấm <strong>Enter</strong> sang cột Nghĩa → bấm <strong>Enter</strong> để lưu & nhập dòng mới liên tục</p>
+                        <h2 class="card-title">📊 Bảng Từ Vựng Theo Bài Học (Anh • Trung • Hàn • Nhật)</h2>
+                        <p class="card-subtitle">Chia theo từng bài học / chủ đề linh hoạt • Gõ từ → <strong>Enter</strong> sang Nghĩa → <strong>Enter</strong> để lưu</p>
                     </div>
                     <div class="row-flex" style="gap:6px;">
                         <button type="button" class="btn btn-sm btn-indigo-soft" data-action="open-bulk-paste">📋 Dán từ Excel</button>
@@ -1986,11 +2133,24 @@
                     </div>
                 </div>
 
+                <!-- THANH QUẢN LÝ BÀI HỌC / CHỦ ĐỀ -->
+                <div class="lesson-bar-wrap">
+                    <div class="lesson-pills-scroll" id="lessonPillsContainer"></div>
+                    <div class="row-flex" style="gap:4px;">
+                        <button type="button" class="btn btn-sm btn-sage" data-action="create-lesson">+ Bài mới</button>
+                        <button type="button" class="btn btn-sm" id="renameLessonBtn" data-action="rename-lesson" style="display:none;" title="Đổi tên bài học đang chọn">✏️ Đổi tên</button>
+                        <button type="button" class="btn btn-sm btn-crimson-soft" id="deleteLessonBtn" data-action="delete-lesson" style="display:none;" title="Xóa bài học (giữ nguyên từ vựng)">🗑️</button>
+                    </div>
+                </div>
+
+                <!-- BỘ LỌC NGÔN NGỮ & CHE CỘT -->
                 <div class="row-flex" style="justify-content:space-between; gap:8px; margin-bottom:10px;">
                     <div class="row-flex" style="gap:5px;">
                         <button type="button" class="btn btn-sm btn-sage" id="fcFilter_all" data-action="fc-filter" data-filter="all">Tất cả (<span id="fcCount_all">0</span>)</button>
                         <button type="button" class="btn btn-sm" id="fcFilter_en" data-action="fc-filter" data-filter="en">🇬🇧 Anh</button>
                         <button type="button" class="btn btn-sm" id="fcFilter_zh" data-action="fc-filter" data-filter="zh">🇨🇳 Trung</button>
+                        <button type="button" class="btn btn-sm" id="fcFilter_kr" data-action="fc-filter" data-filter="kr">🇰🇷 Hàn</button>
+                        <button type="button" class="btn btn-sm" id="fcFilter_ja" data-action="fc-filter" data-filter="ja">🇯🇵 Nhật</button>
                         <button type="button" class="btn btn-sm" id="fcFilter_review" data-action="fc-filter" data-filter="review">⏳ Cần ôn</button>
                     </div>
 
@@ -2001,33 +2161,37 @@
                 </div>
 
                 <div class="row-flex mb-2">
-                    <input type="text" id="fcSearchInput" class="input" placeholder="🔍 Tìm nhanh trong bảng từ vựng hoặc nghĩa tiếng Việt...">
+                    <input type="text" id="fcSearchInput" class="input" placeholder="🔍 Tìm nhanh trong bài học hiện tại hoặc toàn bộ từ vựng...">
                 </div>
 
                 <div id="randomQuizBox" class="sub-box mb-2" style="display:none; background:var(--amber-light); border-color:var(--amber-border);"></div>
 
                 <div class="excel-table-wrap">
-                    <table class="excel-vocab-table">
+                    <table class="excel-vocab-table" style="min-width:620px;">
                         <thead>
                             <tr>
-                                <th style="width:42px; text-align:center;">#</th>
+                                <th style="width:38px; text-align:center;">#</th>
                                 <th style="width:68px; text-align:center;">Hệ</th>
-                                <th style="width:42%;">Cột 1: Từ vựng / Mẫu câu (EN / ZH)</th>
-                                <th style="width:44%;">Cột 2: Nghĩa tiếng Việt & Ghi chú</th>
-                                <th style="width:84px; text-align:center;">Học</th>
+                                <th style="width:33%;">Cột 1: Từ vựng / Mẫu câu</th>
+                                <th style="width:34%;">Cột 2: Nghĩa tiếng Việt & Ghi chú</th>
+                                <th style="width:140px;">Bài học</th>
+                                <th style="width:76px; text-align:center;">Học</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="excel-input-row">
                                 <td style="text-align:center; font-weight:800; color:var(--sage-dark); font-size:12px;">+</td>
                                 <td style="text-align:center; padding:4px;">
-                                    <button type="button" id="excelQuickLangBtn" class="excel-lang-pill en" data-action="toggle-quick-lang" title="Bấm để đổi nhanh Anh / Trung">🇬🇧 EN</button>
+                                    <button type="button" id="excelQuickLangBtn" class="excel-lang-pill en" data-action="toggle-quick-lang" title="Bấm để đổi nhanh Anh / Trung / Hàn / Nhật">🇬🇧 EN</button>
                                 </td>
                                 <td>
                                     <input type="text" id="excelColTermInput" class="excel-cell-input term-col" placeholder="Nhập từ mới (Enter sang cột Nghĩa)...">
                                 </td>
                                 <td>
                                     <input type="text" id="excelColMeaningInput" class="excel-cell-input" placeholder="Nhập nghĩa tiếng Việt (Enter lưu dòng)...">
+                                </td>
+                                <td style="padding:2px;">
+                                    <select id="excelQuickLessonSelect" class="excel-lesson-select" title="Chọn bài học cho từ mới"></select>
                                 </td>
                                 <td style="text-align:center; padding:4px;">
                                     <button type="button" class="btn btn-sm btn-sage" style="padding:5px 8px;" data-action="commit-excel-row">Lưu</button>
@@ -2037,7 +2201,7 @@
                         <tbody id="excelVocabTbody"></tbody>
                     </table>
                 </div>
-                <div class="text-xs text-muted mt-2">💡 Mẹo: Bấm trực tiếp vào bất kỳ ô chữ nào trong bảng để sửa tại chỗ. Khi bật chế độ Che cột, chạm vào từng ô để lật xem đáp án.</div>
+                <div class="text-xs text-muted mt-2">💡 Mẹo: Bấm nút <strong>🇬🇧 EN</strong> ở cột Hệ để xoay vòng nhanh qua <strong>🇨🇳 Trung → 🇰🇷 Hàn → 🇯🇵 Nhật</strong>. Bấm trực tiếp vào ô chữ để sửa tại chỗ hoặc đổi bài học ở cột Bài học.</div>
             </section>
         </div>
 
@@ -2348,20 +2512,28 @@
             <div class="card-header">
                 <div>
                     <h3 class="card-title">📋 Dán hàng loạt từ Excel / Google Sheets</h3>
-                    <p class="card-subtitle">Copy 2 cột từ Excel rồi dán vào ô dưới (tự động tách từng dòng)</p>
+                    <p class="card-subtitle">Copy 2 cột từ Excel rồi dán vào ô dưới (tự động lưu vào bài học đang chọn)</p>
                 </div>
                 <button type="button" class="btn btn-sm" data-action="close-modal" data-modal="bulkPasteModal">✕ Đóng</button>
             </div>
 
             <div class="sub-box">
-                <div class="row-flex" style="justify-content:space-between; margin-bottom:8px;">
-                    <label class="field-label" style="margin:0;">Ngôn ngữ mặc định cho danh sách dán:</label>
-                    <select id="bulkPasteLangSelect" class="select" style="width:auto; padding:5px 10px;">
-                        <option value="en">🇬🇧 Tiếng Anh (TOEIC)</option>
-                        <option value="zh">🇨🇳 Tiếng Trung (HSK)</option>
-                    </select>
+                <div class="grid-2 mb-2">
+                    <div>
+                        <label class="field-label">Ngôn ngữ mặc định:</label>
+                        <select id="bulkPasteLangSelect" class="select">
+                            <option value="en">🇬🇧 Tiếng Anh (TOEIC)</option>
+                            <option value="zh">🇨🇳 Tiếng Trung (HSK)</option>
+                            <option value="kr">🇰🇷 Tiếng Hàn (TOPIK)</option>
+                            <option value="ja">🇯🇵 Tiếng Nhật (JLPT)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="field-label">Lưu vào Bài học:</label>
+                        <select id="bulkPasteLessonSelect" class="select"></select>
+                    </div>
                 </div>
-                <textarea id="bulkPasteTextarea" class="textarea" style="min-height:150px; font-family:monospace; font-size:12.5px;" placeholder="Dán dữ liệu 2 cột từ Excel vào đây, ví dụ:&#10;take precedence over	Được ưu tiên hơn&#10;scrutinize	Xem xét kỹ lưỡng&#10;循序渐进 (xún xù jiàn jìn)	Tuần tự tiệm tiến"></textarea>
+                <textarea id="bulkPasteTextarea" class="textarea" style="min-height:150px; font-family:monospace; font-size:12.5px;" placeholder="Dán dữ liệu 2 cột từ Excel vào đây, ví dụ:&#10;take precedence over	Được ưu tiên hơn&#10;감사합니다 (gamsahamnida)	Cảm ơn&#10;ありがとうございます	Cảm ơn"></textarea>
                 <div class="text-xs text-muted mt-1">Hỗ trợ copy trực tiếp 2 cột từ Excel/Sheets (Tab), hoặc dạng <code>từ vựng - nghĩa</code> / <code>từ vựng : nghĩa</code>.</div>
             </div>
 
@@ -2553,7 +2725,7 @@
             }
 
             // ============================================================
-            // 1. MASTER STORAGE & AUTO-MIGRATION
+            // 1. MASTER STORAGE & LAST-WRITE-WINS SYNC ENGINE
             // ============================================================
             const MASTER_STORAGE_KEY = 'pcos_balance_master_db_v1';
             const LEGACY_KEYS = [
@@ -2563,6 +2735,14 @@
                 'pcos_tracker_data_v1',
                 'pcos_tracker_v4'
             ];
+
+            const LANG_META = {
+                en: { code: 'en', pill: '🇬🇧 EN', label: 'Tiếng Anh' },
+                zh: { code: 'zh', pill: '🇨🇳 ZH', label: 'Tiếng Trung' },
+                kr: { code: 'kr', pill: '🇰🇷 KR', label: 'Tiếng Hàn' },
+                ja: { code: 'ja', pill: '🇯🇵 JA', label: 'Tiếng Nhật' }
+            };
+            const LANG_CYCLE = ['en', 'zh', 'kr', 'ja'];
 
             function getTodayStr() {
                 const d = new Date();
@@ -2601,11 +2781,18 @@
                 { id: 'w_study_zh', text: 'Tiếng Trung HSK5→6: Luyện 3 buổi Từ vựng + Viết tóm tắt (90–120p/buổi)', category: 'study', targetCount: 3 }
             ];
 
+            const DEFAULT_VOCAB_LESSONS = [
+                { id: 'les_toeic', name: '🇬🇧 TOEIC Part 5 & 7' },
+                { id: 'les_hsk', name: '🇨🇳 HSK 5–6 Trọng tâm' },
+                { id: 'les_kr', name: '🇰🇷 Tiếng Hàn Giao tiếp' },
+                { id: 'les_ja', name: '🇯🇵 Tiếng Nhật N5–N4' }
+            ];
+
             const DEFAULT_VOCAB_CARDS = [
-                { id: 'fc_1', lang: 'en', type: 'vocab', term: 'take precedence over', phonetic: '/ˈpres.ɪ.dəns/', meaning: 'Được ưu tiên hơn (Collocation hay gặp TOEIC Part 5 & 7)', mastered: false },
-                { id: 'fc_2', lang: 'en', type: 'mistake', term: 'would rather + V(bare) than + V(bare)', phonetic: 'Bẫy ngữ pháp Part 5', meaning: 'Thà làm gì hơn làm gì (Dùng động từ nguyên thể không TO)', mastered: false },
-                { id: 'fc_3', lang: 'zh', type: 'idiom', term: '循序渐进', phonetic: 'xún xù jiàn jìn', meaning: 'Tuần tự tiệm tiến — học tập từng bước vững chắc theo trình tự (HSK5–6)', mastered: false },
-                { id: 'fc_4', lang: 'zh', type: 'vocab', term: '缩写 (HSK6)', phonetic: 'suō xiě', meaning: 'Viết tóm tắt (Đọc bài 1.000 chữ trong 10p rồi tóm tắt còn ~400 chữ)', mastered: false }
+                { id: 'fc_1', lang: 'en', lessonId: 'les_toeic', type: 'vocab', term: 'take precedence over', phonetic: '/ˈpres.ɪ.dəns/', meaning: 'Được ưu tiên hơn (Collocation hay gặp TOEIC Part 5 & 7)', mastered: false },
+                { id: 'fc_2', lang: 'en', lessonId: 'les_toeic', type: 'mistake', term: 'would rather + V(bare) than + V(bare)', phonetic: 'Bẫy ngữ pháp Part 5', meaning: 'Thà làm gì hơn làm gì (Dùng động từ nguyên thể không TO)', mastered: false },
+                { id: 'fc_3', lang: 'zh', lessonId: 'les_hsk', type: 'idiom', term: '循序渐进', phonetic: 'xún xù jiàn jìn', meaning: 'Tuần tự tiệm tiến — học tập từng bước vững chắc theo trình tự (HSK5–6)', mastered: false },
+                { id: 'fc_4', lang: 'zh', lessonId: 'les_hsk', type: 'vocab', term: '缩写 (HSK6)', phonetic: 'suō xiě', meaning: 'Viết tóm tắt (Đọc bài 1.000 chữ trong 10p rồi tóm tắt còn ~400 chữ)', mastered: false }
             ];
 
             function createInitialStudyState() {
@@ -2623,6 +2810,7 @@
                     zhMockTests: [
                         { id: 'zh_init', date: '2026-11-01', level: 'HSK5', listening: 62, reading: 58, writing: 52, total: 172, note: 'Đề thi thử đầu vào HSK5' }
                     ],
+                    vocabLessons: JSON.parse(JSON.stringify(DEFAULT_VOCAB_LESSONS)),
                     vocabBank: JSON.parse(JSON.stringify(DEFAULT_VOCAB_CARDS))
                 };
             }
@@ -2696,7 +2884,8 @@
                     periodFlow: null,
                     symptoms: [],
                     dailyCompletedIds: [],
-                    onceTasks: []
+                    onceTasks: [],
+                    lastModified: 0
                 };
             }
 
@@ -2714,6 +2903,11 @@
                 return appState.days[dateStr];
             }
 
+            function touchDayModified(dateStr) {
+                const d = ensureDay(dateStr);
+                d.lastModified = Date.now();
+            }
+
             function ensureWeek(monStr) {
                 if (!appState.weeks[monStr]) appState.weeks[monStr] = { progress: {} };
                 if (!appState.weeks[monStr].progress) appState.weeks[monStr].progress = {};
@@ -2729,6 +2923,7 @@
                     if (!appState.study.logsByDate) appState.study.logsByDate = {};
                     if (!Array.isArray(appState.study.enMockTests)) appState.study.enMockTests = def.enMockTests;
                     if (!Array.isArray(appState.study.zhMockTests)) appState.study.zhMockTests = def.zhMockTests;
+                    if (!Array.isArray(appState.study.vocabLessons)) appState.study.vocabLessons = def.vocabLessons;
                     if (!Array.isArray(appState.study.vocabBank)) appState.study.vocabBank = def.vocabBank;
                 }
                 if (!Array.isArray(appState.dailyTemplates) || appState.dailyTemplates.length === 0) {
@@ -2759,8 +2954,16 @@
                 if (!appState.study.logsByDate[dateStr]) {
                     appState.study.logsByDate[dateStr] = {
                         en: { minutes: 0, vocab: 0, listeningSets: 0, readingSets: 0, note: '' },
-                        zh: { minutes: 0, vocab: 0, listenRead: 0, summaryWrite: 0, note: '' }
+                        zh: { minutes: 0, vocab: 0, listenRead: 0, summaryWrite: 0, note: '' },
+                        kr: { minutes: 0, vocab: 0, note: '' },
+                        ja: { minutes: 0, vocab: 0, note: '' }
                     };
+                } else {
+                    const l = appState.study.logsByDate[dateStr];
+                    if (!l.en) l.en = { minutes: 0, vocab: 0, listeningSets: 0, readingSets: 0, note: '' };
+                    if (!l.zh) l.zh = { minutes: 0, vocab: 0, listenRead: 0, summaryWrite: 0, note: '' };
+                    if (!l.kr) l.kr = { minutes: 0, vocab: 0, note: '' };
+                    if (!l.ja) l.ja = { minutes: 0, vocab: 0, note: '' };
                 }
                 return appState.study.logsByDate[dateStr];
             }
@@ -2787,7 +2990,8 @@
                 }
             }
 
-            function mergeStates(target, incoming) {
+            // LAST-WRITE-WINS MERGE (FIXES OLD-DATE EDIT OVERWRITE BUG)
+            function mergeStates(target, incoming, isRemoteAuthoritative = false) {
                 if (!incoming || typeof incoming !== 'object') return target;
                 if (typeof incoming.kcalGoal === 'number') target.kcalGoal = incoming.kcalGoal;
 
@@ -2814,10 +3018,18 @@
                 if (incoming.days && typeof incoming.days === 'object') {
                     Object.keys(incoming.days).forEach(dKey => {
                         const sDay = incoming.days[dKey];
+                        if (!sDay) return;
                         if (!target.days[dKey]) {
                             target.days[dKey] = JSON.parse(JSON.stringify(sDay));
-                        } else {
-                            const dDay = target.days[dKey];
+                            return;
+                        }
+                        const dDay = target.days[dKey];
+                        const sMod = Number(sDay.lastModified) || 0;
+                        const dMod = Number(dDay.lastModified) || 0;
+
+                        if (isRemoteAuthoritative && sMod >= dMod) {
+                            target.days[dKey] = JSON.parse(JSON.stringify(sDay));
+                        } else if (!isRemoteAuthoritative) {
                             ['breakfast', 'lunch', 'snack', 'dinner'].forEach(slot => {
                                 const srcArr = (sDay.meals && sDay.meals[slot]) || [];
                                 if (!dDay.meals[slot]) dDay.meals[slot] = [];
@@ -2829,19 +3041,12 @@
                                     }
                                 });
                             });
-                            dDay.steps = Math.max(dDay.steps || 0, sDay.steps || 0);
-                            dDay.waterMl = Math.max(dDay.waterMl || 0, sDay.waterMl || 0);
-                            if (sDay.weight) dDay.weight = sDay.weight;
-                            if (sDay.waist) dDay.waist = sDay.waist;
-                            if (sDay.sleepHours) dDay.sleepHours = sDay.sleepHours;
-                            if (sDay.periodFlow) dDay.periodFlow = sDay.periodFlow;
-                            if (Array.isArray(sDay.workouts)) {
-                                const wSeen = new Set((dDay.workouts || []).map(w => w.id));
-                                sDay.workouts.forEach(w => { if (w && !wSeen.has(w.id)) dDay.workouts.push(w); });
-                            }
-                            if (Array.isArray(sDay.dailyCompletedIds)) {
-                                dDay.dailyCompletedIds = Array.from(new Set([...(dDay.dailyCompletedIds || []), ...sDay.dailyCompletedIds]));
-                            }
+                            if (typeof sDay.steps === 'number') dDay.steps = sDay.steps;
+                            if (typeof sDay.waterMl === 'number') dDay.waterMl = sDay.waterMl;
+                            if (sDay.weight !== undefined) dDay.weight = sDay.weight;
+                            if (sDay.waist !== undefined) dDay.waist = sDay.waist;
+                            if (sDay.sleepHours !== undefined) dDay.sleepHours = sDay.sleepHours;
+                            if (sDay.periodFlow !== undefined) dDay.periodFlow = sDay.periodFlow;
                         }
                     });
                 }
@@ -2851,33 +3056,46 @@
                     const sSt = incoming.study;
                     const dSt = target.study;
                     if (typeof sSt.zhCumulativeVocab === 'number') {
-                        dSt.zhCumulativeVocab = Math.max(dSt.zhCumulativeVocab || 1200, sSt.zhCumulativeVocab);
+                        dSt.zhCumulativeVocab = isRemoteAuthoritative ? sSt.zhCumulativeVocab : Math.max(dSt.zhCumulativeVocab || 1200, sSt.zhCumulativeVocab);
                     }
                     if (sSt.logsByDate) {
                         Object.keys(sSt.logsByDate).forEach(dk => {
-                            if (!dSt.logsByDate[dk]) {
+                            if (isRemoteAuthoritative || !dSt.logsByDate[dk]) {
                                 dSt.logsByDate[dk] = JSON.parse(JSON.stringify(sSt.logsByDate[dk]));
-                            } else {
-                                ['en', 'zh'].forEach(lg => {
-                                    if (sSt.logsByDate[dk][lg]) {
-                                        dSt.logsByDate[dk][lg].minutes = Math.max(dSt.logsByDate[dk][lg].minutes || 0, sSt.logsByDate[dk][lg].minutes || 0);
-                                        dSt.logsByDate[dk][lg].vocab = Math.max(dSt.logsByDate[dk][lg].vocab || 0, sSt.logsByDate[dk][lg].vocab || 0);
-                                    }
-                                });
                             }
                         });
                     }
                     if (Array.isArray(sSt.enMockTests)) {
-                        const seen = new Set(dSt.enMockTests.map(m => m.id));
-                        sSt.enMockTests.forEach(m => { if (m && !seen.has(m.id)) dSt.enMockTests.push(m); });
+                        if (isRemoteAuthoritative) {
+                            dSt.enMockTests = JSON.parse(JSON.stringify(sSt.enMockTests));
+                        } else {
+                            const seen = new Set(dSt.enMockTests.map(m => m.id));
+                            sSt.enMockTests.forEach(m => { if (m && !seen.has(m.id)) dSt.enMockTests.push(m); });
+                        }
                     }
                     if (Array.isArray(sSt.zhMockTests)) {
-                        const seen = new Set(dSt.zhMockTests.map(m => m.id));
-                        sSt.zhMockTests.forEach(m => { if (m && !seen.has(m.id)) dSt.zhMockTests.push(m); });
+                        if (isRemoteAuthoritative) {
+                            dSt.zhMockTests = JSON.parse(JSON.stringify(sSt.zhMockTests));
+                        } else {
+                            const seen = new Set(dSt.zhMockTests.map(m => m.id));
+                            sSt.zhMockTests.forEach(m => { if (m && !seen.has(m.id)) dSt.zhMockTests.push(m); });
+                        }
+                    }
+                    if (Array.isArray(sSt.vocabLessons)) {
+                        if (isRemoteAuthoritative) {
+                            dSt.vocabLessons = JSON.parse(JSON.stringify(sSt.vocabLessons));
+                        } else {
+                            const seenL = new Set(dSt.vocabLessons.map(l => l.id));
+                            sSt.vocabLessons.forEach(l => { if (l && !seenL.has(l.id)) dSt.vocabLessons.push(l); });
+                        }
                     }
                     if (Array.isArray(sSt.vocabBank)) {
-                        const seen = new Set(dSt.vocabBank.map(v => v.id));
-                        sSt.vocabBank.forEach(v => { if (v && !seen.has(v.id)) dSt.vocabBank.push(v); });
+                        if (isRemoteAuthoritative) {
+                            dSt.vocabBank = JSON.parse(JSON.stringify(sSt.vocabBank));
+                        } else {
+                            const seen = new Set(dSt.vocabBank.map(v => v.id));
+                            sSt.vocabBank.forEach(v => { if (v && !seen.has(v.id)) dSt.vocabBank.push(v); });
+                        }
                     }
                 }
 
@@ -2886,22 +3104,30 @@
                     const sSav = incoming.savings;
                     const dSav = target.savings;
                     if (Array.isArray(sSav.goals)) {
-                        const seenG = new Set(dSav.goals.map(g => g.id));
-                        sSav.goals.forEach(g => {
-                            if (g && !seenG.has(g.id)) {
-                                dSav.goals.push(g);
-                                seenG.add(g.id);
-                            }
-                        });
+                        if (isRemoteAuthoritative) {
+                            dSav.goals = JSON.parse(JSON.stringify(sSav.goals));
+                        } else {
+                            const seenG = new Set(dSav.goals.map(g => g.id));
+                            sSav.goals.forEach(g => {
+                                if (g && !seenG.has(g.id)) {
+                                    dSav.goals.push(g);
+                                    seenG.add(g.id);
+                                }
+                            });
+                        }
                     }
                     if (Array.isArray(sSav.transactions)) {
-                        const seenTx = new Set(dSav.transactions.map(t => t.id));
-                        sSav.transactions.forEach(t => {
-                            if (t && !seenTx.has(t.id)) {
-                                dSav.transactions.push(t);
-                                seenTx.add(t.id);
-                            }
-                        });
+                        if (isRemoteAuthoritative) {
+                            dSav.transactions = JSON.parse(JSON.stringify(sSav.transactions));
+                        } else {
+                            const seenTx = new Set(dSav.transactions.map(t => t.id));
+                            sSav.transactions.forEach(t => {
+                                if (t && !seenTx.has(t.id)) {
+                                    dSav.transactions.push(t);
+                                    seenTx.add(t.id);
+                                }
+                            });
+                        }
                     }
                 }
                 return target;
@@ -2921,7 +3147,7 @@
                         const oldRaw = localStorage.getItem(k);
                         if (oldRaw) {
                             try {
-                                mergeStates(appState, JSON.parse(oldRaw));
+                                mergeStates(appState, JSON.parse(oldRaw), false);
                             } catch (err) {}
                         }
                     });
@@ -2945,7 +3171,7 @@
             }
 
             // ============================================================
-            // 2. VIETNAMESE FOOD DATABASE (120+ ITEMS)
+            // 2. VIETNAMESE FOOD DATABASE
             // ============================================================
             const VIET_FOOD_DB = [
                 [['cơm gạo lứt', 'cơm lứt', 'gạo lứt'], 'bát', 215, 5, 45, 1.8, 'low'],
@@ -3013,14 +3239,14 @@
                 const text = rawPart.trim().toLowerCase();
                 let multiplier = 1;
 
-                const gramMatch = text.match(/(\d+(?:[.,]\d+)?)\s*(kg|g|gr|gram)\b/);
+                const gramMatch = text.match(/(\d+(?:[.,]\d+)?)\s*(kg|g|gr|gram) /);
                 if (gramMatch) {
                     let num = parseFloat(gramMatch[1].replace(',', '.'));
                     if (gramMatch[2] === 'kg') num *= 1000;
                     return { multiplier: num / 100, isGramBased: true };
                 }
 
-                const mlMatch = text.match(/(\d+(?:[.,]\d+)?)\s*ml\b/);
+                const mlMatch = text.match(/(\d+(?:[.,]\d+)?)\s*ml /);
                 if (mlMatch) {
                     const num = parseFloat(mlMatch[1].replace(',', '.'));
                     return { multiplier: num / 200, isGramBased: false };
@@ -3117,7 +3343,8 @@
                 const raw = input.value.trim();
                 if (!raw) return;
 
-                const parts = raw.split(/[,;\n]+/).map(s => s.trim()).filter(Boolean);
+                const parts = raw.split(/[,;
+]+/).map(s => s.trim()).filter(Boolean);
                 const day = ensureDay(appState.currentDate);
                 let addedCount = 0;
 
@@ -3129,6 +3356,7 @@
                     }
                 });
 
+                touchDayModified(appState.currentDate);
                 input.value = '';
                 saveState();
                 renderAll();
@@ -3140,6 +3368,7 @@
                 if (!parsed) return;
                 const day = ensureDay(appState.currentDate);
                 day.meals[appState.selectedMealSlot].push(parsed);
+                touchDayModified(appState.currentDate);
                 saveState();
                 renderAll();
                 showToast(`+ ${parsed.name} (${parsed.kcal} kcal)`);
@@ -3148,6 +3377,7 @@
             function removeMealItem(slot, itemId) {
                 const day = ensureDay(appState.currentDate);
                 day.meals[slot] = day.meals[slot].filter(i => i.id !== itemId);
+                touchDayModified(appState.currentDate);
                 saveState();
                 renderAll();
             }
@@ -3175,6 +3405,7 @@
                         analyzeSingleFoodPhrase('100g tôm hấp')
                     ]
                 };
+                touchDayModified(appState.currentDate);
                 saveState();
                 renderAll();
                 showToast('Đã điền thực đơn mẫu ~1.380 kcal chuẩn PCOS!');
@@ -3203,6 +3434,7 @@
                 } else {
                     const day = ensureDay(appState.currentDate);
                     day.onceTasks.push({ id: 'o_' + Date.now(), text, category, done: false });
+                    touchDayModified(appState.currentDate);
                 }
 
                 document.getElementById('newTaskText').value = '';
@@ -3216,6 +3448,7 @@
                 const idx = day.dailyCompletedIds.indexOf(taskId);
                 if (idx === -1) day.dailyCompletedIds.push(taskId);
                 else day.dailyCompletedIds.splice(idx, 1);
+                touchDayModified(appState.currentDate);
                 saveState();
                 renderAll();
             }
@@ -3248,6 +3481,7 @@
                 const day = ensureDay(appState.currentDate);
                 const t = day.onceTasks.find(x => x.id === taskId);
                 if (t) t.done = !t.done;
+                touchDayModified(appState.currentDate);
                 saveState();
                 renderTasks();
             }
@@ -3255,6 +3489,7 @@
             function deleteOnceTask(taskId) {
                 const day = ensureDay(appState.currentDate);
                 day.onceTasks = day.onceTasks.filter(x => x.id !== taskId);
+                touchDayModified(appState.currentDate);
                 saveState();
                 renderTasks();
             }
@@ -3279,15 +3514,17 @@
                 day.waist = !isNaN(waist) && waist > 0 ? waist : null;
                 day.sleepHours = !isNaN(sleepH) && sleepH >= 0 ? sleepH : null;
                 day.sleepQuality = sleepQ;
+                touchDayModified(appState.currentDate);
 
                 saveState();
                 renderBodyAndSymptoms();
-                showToast('Đã lưu chỉ số cơ thể & giấc ngủ');
+                showToast('Đã lưu chỉ số cơ thể & đồng bộ đám mây!');
             }
 
             function addWater(ml) {
                 const day = ensureDay(appState.currentDate);
                 day.waterMl = (day.waterMl || 0) + ml;
+                touchDayModified(appState.currentDate);
                 saveState();
                 renderBodyAndSymptoms();
                 showToast(`+${ml}ml nước (Tổng: ${day.waterMl}ml)`);
@@ -3296,6 +3533,7 @@
             function resetWater() {
                 const day = ensureDay(appState.currentDate);
                 day.waterMl = 0;
+                touchDayModified(appState.currentDate);
                 saveState();
                 renderBodyAndSymptoms();
             }
@@ -3303,18 +3541,22 @@
             function addSteps(delta) {
                 const day = ensureDay(appState.currentDate);
                 day.steps = Math.max(0, (day.steps || 0) + delta);
+                touchDayModified(appState.currentDate);
                 saveState();
                 renderAll();
                 showToast(`+${delta.toLocaleString('vi-VN')} bước chân!`);
             }
 
-            function setManualSteps() {
+            function setManualSteps(notify = true) {
                 const day = ensureDay(appState.currentDate);
-                const val = parseInt(document.getElementById('stepsManualInput').value, 10);
+                const raw = document.getElementById('stepsManualInput').value;
+                const val = raw === '' ? 0 : parseInt(raw, 10);
                 if (!isNaN(val) && val >= 0) {
                     day.steps = val;
+                    touchDayModified(appState.currentDate);
                     saveState();
                     renderAll();
+                    if (notify) showToast(`Đã lưu ${val.toLocaleString('vi-VN')} bước cho ngày ${appState.currentDate.split('-').reverse().join('/')}!`);
                 }
             }
 
@@ -3335,6 +3577,7 @@
 
                 const day = ensureDay(appState.currentDate);
                 day.workouts.push({ id: 'wo_' + Date.now(), name: presetName, mins, kcal, note });
+                touchDayModified(appState.currentDate);
                 document.getElementById('workoutNoteInput').value = '';
                 saveState();
                 renderAll();
@@ -3344,6 +3587,7 @@
             function removeWorkoutEntry(wId) {
                 const day = ensureDay(appState.currentDate);
                 day.workouts = day.workouts.filter(w => w.id !== wId);
+                touchDayModified(appState.currentDate);
                 saveState();
                 renderAll();
             }
@@ -3359,6 +3603,7 @@
             function togglePeriodDay(flowLevel) {
                 const day = ensureDay(appState.currentDate);
                 day.periodFlow = day.periodFlow === flowLevel ? null : flowLevel;
+                touchDayModified(appState.currentDate);
                 saveState();
                 renderCycleTracker();
                 showToast(day.periodFlow ? 'Đã đánh dấu ngày có kinh nguyệt' : 'Đã bỏ đánh dấu ngày kinh');
@@ -3369,14 +3614,16 @@
                 const idx = day.symptoms.indexOf(sym);
                 if (idx === -1) day.symptoms.push(sym);
                 else day.symptoms.splice(idx, 1);
+                touchDayModified(appState.currentDate);
                 saveState();
                 renderCycleTracker();
             }
 
             // ============================================================
-            // 4. TAB 2 ACTIONS: LANGUAGE STUDY & EXCEL 2-COL VOCAB TABLE
+            // 4. TAB 2 ACTIONS: 4 LANGUAGES & FLEXIBLE LESSON VOCAB TABLE
             // ============================================================
             let fcFilter = 'all';
+            let activeLessonFilter = 'all';
             let hideTermCol = false;
             let hideMeaningCol = false;
             let excelQuickLang = 'en';
@@ -3436,7 +3683,7 @@
                 const isOdd = dayNum % 2 === 1;
                 const autoLang = isOdd ? 'en' : 'zh';
                 const mode = appState.study.overrideMode || 'auto';
-                const lang = (mode === 'en' || mode === 'zh') ? mode : autoLang;
+                const lang = ['en', 'zh', 'kr', 'ja'].includes(mode) ? mode : autoLang;
                 return { lang, isOdd, mode };
             }
 
@@ -3445,30 +3692,34 @@
                 ensureSavings();
                 const day = ensureDay(appState.currentDate);
 
-                // 1. Sync Study task
                 const info = getStudyScheduleInfo(appState.currentDate);
-                const activeId = info.lang === 'en' ? 'd_study_en' : 'd_study_zh';
-                const otherId = info.lang === 'en' ? 'd_study_zh' : 'd_study_en';
+                const activeId = 'd_study_' + info.lang;
+                ['d_study_en', 'd_study_zh', 'd_study_kr', 'd_study_ja'].forEach(id => {
+                    if (id !== activeId) {
+                        appState.dailyTemplates = appState.dailyTemplates.filter(t => t.id !== id);
+                    }
+                });
 
-                appState.dailyTemplates = appState.dailyTemplates.filter(t => t.id !== otherId);
-                const label = info.lang === 'en'
-                    ? 'Học Tiếng Anh 90–120p (Ngày lẻ): TOEIC 850+ Nghe/Đọc & Từ vựng'
-                    : 'Học Tiếng Trung 90–120p (Ngày chẵn): Từ vựng HSK5→6 & Viết tóm tắt';
+                const labelsMap = {
+                    en: 'Học Tiếng Anh 90–120p: TOEIC 850+ Nghe/Đọc & Từ vựng',
+                    zh: 'Học Tiếng Trung 90–120p: Từ vựng HSK5→6 & Viết tóm tắt',
+                    kr: 'Học Tiếng Hàn: Từ vựng, Ngữ pháp & Luyện nghe nói',
+                    ja: 'Học Tiếng Nhật: Từ vựng, Kanji & Ngữ pháp JLPT'
+                };
 
                 const idx = appState.dailyTemplates.findIndex(t => t.id === activeId);
                 if (idx === -1) {
-                    appState.dailyTemplates.unshift({ id: activeId, text: label, category: 'study' });
+                    appState.dailyTemplates.unshift({ id: activeId, text: labelsMap[info.lang], category: 'study' });
                 } else {
-                    appState.dailyTemplates[idx].text = label;
+                    appState.dailyTemplates[idx].text = labelsMap[info.lang];
                 }
 
                 const log = ensureStudyLog(appState.currentDate);
-                const totalMins = (Number(log.en.minutes) || 0) + (Number(log.zh.minutes) || 0);
+                const totalMins = (Number(log.en.minutes) || 0) + (Number(log.zh.minutes) || 0) + (Number(log.kr.minutes) || 0) + (Number(log.ja.minutes) || 0);
                 if (totalMins >= 90 && !day.dailyCompletedIds.includes(activeId)) {
                     day.dailyCompletedIds.push(activeId);
                 }
 
-                // 2. Sync Savings habit if enabled
                 const savHabitId = 'd_savings_daily';
                 if (appState.savings.syncDailyHabit) {
                     if (!appState.dailyTemplates.some(t => t.id === savHabitId)) {
@@ -3494,12 +3745,13 @@
                 document.getElementById('pomoLangSelect').value = info.lang;
                 saveState();
                 renderAll();
-                showToast(mode === 'auto' ? 'Đã bật lịch học tự động Chẵn/Lẻ' : `Đã chuyển ưu tiên sang ${mode === 'en' ? 'Tiếng Anh' : 'Tiếng Trung'}`);
+                const nameMap = { auto: 'Lịch tự động Chẵn/Lẻ', en: 'Tiếng Anh', zh: 'Tiếng Trung', kr: 'Tiếng Hàn', ja: 'Tiếng Nhật' };
+                showToast(`Đã chuyển ưu tiên sang: ${nameMap[mode] || mode}`);
             }
 
             function toggleTodayStudySyncedTask() {
                 const info = getStudyScheduleInfo(appState.currentDate);
-                const activeId = info.lang === 'en' ? 'd_study_en' : 'd_study_zh';
+                const activeId = 'd_study_' + info.lang;
                 toggleDailyTask(activeId);
             }
 
@@ -3508,7 +3760,8 @@
                 log[lang].minutes = (Number(log[lang].minutes) || 0) + mins;
                 saveState();
                 renderAll();
-                showToast(`+${mins} phút học ${lang === 'en' ? 'Tiếng Anh' : 'Tiếng Trung'}!`);
+                const lName = (LANG_META[lang] && LANG_META[lang].label) || lang;
+                showToast(`+${mins} phút học ${lName}!`);
             }
 
             function saveStudyLog(lang, notify = false) {
@@ -3519,7 +3772,7 @@
                     log.en.listeningSets = Math.max(0, parseInt(document.getElementById('enListenPartsInput').value, 10) || 0);
                     log.en.readingSets = Math.max(0, parseInt(document.getElementById('enReadPartsInput').value, 10) || 0);
                     log.en.note = document.getElementById('enNoteInput').value.trim();
-                } else {
+                } else if (lang === 'zh') {
                     const oldVocab = Number(log.zh.vocab) || 0;
                     const newVocab = Math.max(0, parseInt(document.getElementById('zhVocabInput').value, 10) || 0);
                     log.zh.minutes = Math.max(0, parseInt(document.getElementById('zhMinsInput').value, 10) || 0);
@@ -3531,10 +3784,18 @@
                     if (newVocab !== oldVocab) {
                         appState.study.zhCumulativeVocab = Math.max(0, (Number(appState.study.zhCumulativeVocab) || 1200) + (newVocab - oldVocab));
                     }
+                } else if (lang === 'kr') {
+                    log.kr.minutes = Math.max(0, parseInt(document.getElementById('krMinsInput').value, 10) || 0);
+                    log.kr.vocab = Math.max(0, parseInt(document.getElementById('krVocabInput').value, 10) || 0);
+                    log.kr.note = document.getElementById('krNoteInput').value.trim();
+                } else if (lang === 'ja') {
+                    log.ja.minutes = Math.max(0, parseInt(document.getElementById('jaMinsInput').value, 10) || 0);
+                    log.ja.vocab = Math.max(0, parseInt(document.getElementById('jaVocabInput').value, 10) || 0);
+                    log.ja.note = document.getElementById('jaNoteInput').value.trim();
                 }
                 saveState();
                 renderAll();
-                if (notify) showToast(`Đã lưu nhật ký học ${lang === 'en' ? 'Tiếng Anh' : 'Tiếng Trung'}!`);
+                if (notify) showToast(`Đã lưu nhật ký học ${(LANG_META[lang] && LANG_META[lang].label) || ''}!`);
             }
 
             function addZhCumVocab(delta) {
@@ -3679,21 +3940,80 @@
                 quickAddStudyMins(lang, elapsed);
             }
 
+            // FLEXIBLE LESSONS MANAGEMENT
+            function selectLessonFilter(lessonId) {
+                activeLessonFilter = lessonId;
+                renderFlashcards();
+            }
+
+            function createNewLesson() {
+                ensureStudy();
+                const name = prompt('Nhập tên Bài học / Chủ đề mới (vd: HSK 5 - Bài 3, Tiếng Hàn Bài 2, Từ vựng Tài chính):');
+                if (!name || !name.trim()) return;
+                const newId = 'les_' + Date.now();
+                appState.study.vocabLessons.push({ id: newId, name: name.trim() });
+                activeLessonFilter = newId;
+                saveState();
+                renderFlashcards();
+                showToast(`Đã tạo bài học: ${name.trim()}`);
+            }
+
+            function renameActiveLesson() {
+                ensureStudy();
+                const lesson = appState.study.vocabLessons.find(l => l.id === activeLessonFilter);
+                if (!lesson) return;
+                const newName = prompt('Đổi tên bài học thành:', lesson.name);
+                if (!newName || !newName.trim()) return;
+                lesson.name = newName.trim();
+                saveState();
+                renderFlashcards();
+                showToast(`Đã đổi tên thành: ${lesson.name}`);
+            }
+
+            function deleteActiveLesson() {
+                ensureStudy();
+                const lesson = appState.study.vocabLessons.find(l => l.id === activeLessonFilter);
+                if (!lesson) return;
+                if (!confirm(`Xóa bài học "${lesson.name}"?
+(Các từ vựng bên trong vẫn được giữ nguyên và chuyển về mục "Chưa phân loại")`)) return;
+                appState.study.vocabLessons = appState.study.vocabLessons.filter(l => l.id !== activeLessonFilter);
+                appState.study.vocabBank.forEach(c => {
+                    if (c.lessonId === activeLessonFilter) c.lessonId = '';
+                });
+                activeLessonFilter = 'all';
+                saveState();
+                renderFlashcards();
+                showToast('Đã xóa bài học (từ vựng vẫn được giữ nguyên)');
+            }
+
+            function updateCardLesson(cardId, lessonId) {
+                ensureStudy();
+                const card = appState.study.vocabBank.find(c => c.id === cardId);
+                if (!card) return;
+                card.lessonId = lessonId || '';
+                saveState();
+                renderFlashcards();
+            }
+
             // EXCEL 2-COLUMN VOCABULARY FUNCTIONS
             function toggleQuickInputLang() {
-                excelQuickLang = excelQuickLang === 'en' ? 'zh' : 'en';
+                const idx = LANG_CYCLE.indexOf(excelQuickLang);
+                excelQuickLang = LANG_CYCLE[(idx + 1) % LANG_CYCLE.length];
                 const btn = document.getElementById('excelQuickLangBtn');
                 if (btn) {
+                    const meta = LANG_META[excelQuickLang] || LANG_META.en;
                     btn.className = `excel-lang-pill ${excelQuickLang}`;
-                    btn.textContent = excelQuickLang === 'en' ? '🇬🇧 EN' : '🇨🇳 ZH';
+                    btn.textContent = meta.pill;
                 }
             }
 
             function commitExcelQuickRow() {
                 const col1 = document.getElementById('excelColTermInput');
                 const col2 = document.getElementById('excelColMeaningInput');
+                const lessonSel = document.getElementById('excelQuickLessonSelect');
                 const term = (col1.value || '').trim();
                 const meaning = (col2.value || '').trim();
+                const lessonId = lessonSel ? lessonSel.value : '';
 
                 if (!term) {
                     col1.focus();
@@ -3710,6 +4030,7 @@
                 appState.study.vocabBank.unshift({
                     id: 'fc_' + Date.now() + '_' + Math.random().toString(36).slice(2, 5),
                     lang: excelQuickLang,
+                    lessonId,
                     type: 'vocab',
                     term,
                     phonetic: '',
@@ -3744,13 +4065,19 @@
                 ensureStudy();
                 const item = appState.study.vocabBank.find(x => x.id === id);
                 if (!item) return;
-                item.lang = item.lang === 'en' ? 'zh' : 'en';
+                const idx = LANG_CYCLE.indexOf(item.lang);
+                item.lang = LANG_CYCLE[(idx + 1) % LANG_CYCLE.length];
                 saveState();
                 renderFlashcards();
             }
 
             function openBulkPasteModal() {
+                ensureStudy();
                 document.getElementById('bulkPasteLangSelect').value = excelQuickLang;
+                const lessonSel = document.getElementById('bulkPasteLessonSelect');
+                lessonSel.innerHTML = `<option value="">-- Chưa phân loại --</option>` + appState.study.vocabLessons.map(l =>
+                    `<option value="${l.id}" ${l.id === activeLessonFilter ? 'selected' : ''}>${escHtml(l.name)}</option>`
+                ).join('');
                 document.getElementById('bulkPasteTextarea').value = '';
                 openModal('bulkPasteModal');
                 setTimeout(() => document.getElementById('bulkPasteTextarea').focus(), 80);
@@ -3759,17 +4086,20 @@
             function processBulkExcelPaste() {
                 const raw = document.getElementById('bulkPasteTextarea').value.trim();
                 const lang = document.getElementById('bulkPasteLangSelect').value;
+                const lessonId = document.getElementById('bulkPasteLessonSelect').value || '';
                 if (!raw) {
                     showToast('Chưa có nội dung để nhập!');
                     return;
                 }
 
                 ensureStudy();
-                const lines = raw.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+                const lines = raw.split(/
+?
+/).map(l => l.trim()).filter(Boolean);
                 let added = 0;
 
                 lines.reverse().forEach(line => {
-                    let parts = line.split('\t');
+                    let parts = line.split('	');
                     if (parts.length < 2) {
                         const sepMatch = line.match(/^(.+?)\s*(?:[-–—:]|\|)\s*(.+)$/);
                         if (sepMatch) parts = [sepMatch[1], sepMatch[2]];
@@ -3780,6 +4110,7 @@
                         appState.study.vocabBank.unshift({
                             id: 'fc_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
                             lang,
+                            lessonId,
                             type: 'vocab',
                             term,
                             phonetic: '',
@@ -3803,30 +4134,35 @@
 
             function exportVocabCsv() {
                 ensureStudy();
-                const rows = [['Ngon ngu', 'Tu vung / Mau cau', 'Nghia tieng Viet', 'Trang thai']];
+                const lessonMap = {};
+                appState.study.vocabLessons.forEach(l => { lessonMap[l.id] = l.name; });
+                const rows = [['Ngon ngu', 'Bai hoc', 'Tu vung / Mau cau', 'Nghia tieng Viet', 'Trang thai']];
                 appState.study.vocabBank.forEach(c => {
                     const fullTerm = c.phonetic ? `${c.term} (${c.phonetic})` : c.term;
+                    const lMeta = LANG_META[c.lang] || LANG_META.en;
                     rows.push([
-                        c.lang === 'en' ? 'Tieng Anh' : 'Tieng Trung',
+                        lMeta.label,
+                        lessonMap[c.lessonId] || 'Chua phan loai',
                         fullTerm,
                         c.meaning,
                         c.mastered ? 'Da thuoc' : 'Can on'
                     ]);
                 });
-                const csvBody = rows.map(r => r.map(cell => `"${String(cell || '').replace(/"/g, '""')}"`).join(',')).join('\r\n');
-                const blob = new Blob(['\uFEFF' + csvBody], { type: 'text/csv;charset=utf-8;' });
+                const csvBody = rows.map(r => r.map(cell => `"${String(cell || '').replace(/"/g, '""')}"`).join(',')).join('
+');
+                const blob = new Blob(['﻿' + csvBody], { type: 'text/csv;charset=utf-8;' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `tu_vung_anh_trung_${appState.currentDate}.csv`;
+                a.download = `tu_vung_da_ngu_${appState.currentDate}.csv`;
                 a.click();
                 URL.revokeObjectURL(url);
-                showToast('Đã xuất file Excel (.csv) chuẩn tiếng Việt & tiếng Trung!');
+                showToast('Đã xuất file Excel (.csv) đầy đủ bài học & 4 ngôn ngữ!');
             }
 
             function setFcFilter(val) {
                 fcFilter = val;
-                ['all', 'en', 'zh', 'review'].forEach(k => {
+                ['all', 'en', 'zh', 'kr', 'ja', 'review'].forEach(k => {
                     const btn = document.getElementById('fcFilter_' + k);
                     if (btn) btn.className = k === val ? 'btn btn-sm btn-sage' : 'btn btn-sm';
                 });
@@ -3864,18 +4200,24 @@
             }
 
             function openRandomQuiz() {
-                const pool = appState.study.vocabBank.filter(x => !x.mastered);
-                const arr = pool.length > 0 ? pool : appState.study.vocabBank;
+                const basePool = appState.study.vocabBank.filter(x => {
+                    if (activeLessonFilter === 'all') return true;
+                    if (activeLessonFilter === 'unassigned') return !x.lessonId;
+                    return x.lessonId === activeLessonFilter;
+                });
+                const unmastered = basePool.filter(x => !x.mastered);
+                const arr = unmastered.length > 0 ? unmastered : basePool;
                 if (arr.length === 0) {
-                    showToast('Bảng từ vựng đang trống!');
+                    showToast('Bài học này chưa có từ vựng nào!');
                     return;
                 }
                 const card = arr[Math.floor(Math.random() * arr.length)];
+                const lMeta = LANG_META[card.lang] || LANG_META.en;
                 const box = document.getElementById('randomQuizBox');
                 box.style.display = 'block';
                 box.innerHTML = `
                     <div class="row-flex" style="justify-content:space-between;">
-                        <span class="text-xs font-extrabold" style="color:var(--amber-text);">🎲 ÔN THẺ NGẪU NHIÊN (${card.lang === 'en' ? '🇬🇧 Tiếng Anh' : '🇨🇳 Tiếng Trung'})</span>
+                        <span class="text-xs font-extrabold" style="color:var(--amber-text);">🎲 ÔN THẺ NGẪU NHIÊN (${lMeta.pill} ${lMeta.label})</span>
                         <button type="button" class="btn btn-sm" data-action="close-random-quiz">✕</button>
                     </div>
                     <div style="font-size:17px; font-weight:800; margin-top:6px;">${escHtml(card.term)} <span class="text-xs text-muted">${escHtml(card.phonetic || '')}</span></div>
@@ -4522,12 +4864,13 @@
 
                 const enMins = Number(log.en.minutes) || 0;
                 const zhMins = Number(log.zh.minutes) || 0;
-                const totalMins = enMins + zhMins;
+                const krMins = Number(log.kr.minutes) || 0;
+                const jaMins = Number(log.ja.minutes) || 0;
+                const totalMins = enMins + zhMins + krMins + jaMins;
 
                 document.getElementById('topStudyBadge').textContent = `${totalMins}p`;
-                document.getElementById('topSchedulePill').textContent = info.lang === 'en'
-                    ? `📅 ${info.isOdd ? 'Ngày lẻ' : 'Đổi lịch'}: Tiếng Anh (90–120p)`
-                    : `📅 ${!info.isOdd ? 'Ngày chẵn' : 'Đổi lịch'}: Tiếng Trung (90–120p)`;
+                const curMeta = LANG_META[info.lang] || LANG_META.en;
+                document.getElementById('topSchedulePill').textContent = `📅 Lịch hôm nay: ${curMeta.label} (${totalMins}p)`;
 
                 const pBadge = document.getElementById('studyParityBadge');
                 const fHead = document.getElementById('studyFocusHeading');
@@ -4535,25 +4878,33 @@
                     pBadge.className = 'badge badge-indigo';
                     pBadge.textContent = info.isOdd ? 'Ngày lẻ • Ưu tiên Tiếng Anh' : 'Chọn thủ công • Tiếng Anh';
                     fHead.textContent = 'Lịch học hôm nay: Tiếng Anh (TOEIC 700 → 850+)';
-                } else {
+                } else if (info.lang === 'zh') {
                     pBadge.className = 'badge badge-crimson';
                     pBadge.textContent = !info.isOdd ? 'Ngày chẵn • Ưu tiên Tiếng Trung' : 'Chọn thủ công • Tiếng Trung';
                     fHead.textContent = 'Lịch học hôm nay: Tiếng Trung (HSK4 → HSK5 → HSK6)';
+                } else if (info.lang === 'kr') {
+                    pBadge.className = 'badge badge-indigo';
+                    pBadge.textContent = 'Chọn thủ công • Tiếng Hàn';
+                    fHead.textContent = 'Lịch học hôm nay: Tiếng Hàn (TOPIK & Giao tiếp)';
+                } else {
+                    pBadge.className = 'badge badge-pink';
+                    pBadge.textContent = 'Chọn thủ công • Tiếng Nhật';
+                    fHead.textContent = 'Lịch học hôm nay: Tiếng Nhật (JLPT & Kanji)';
                 }
 
-                ['auto', 'en', 'zh'].forEach(m => {
+                ['auto', 'en', 'zh', 'kr', 'ja'].forEach(m => {
                     const b = document.getElementById('ovBtn_' + m);
                     if (b) b.className = info.mode === m ? 'btn btn-sm btn-sage' : 'btn btn-sm';
                 });
 
                 document.getElementById('studyTodayMinsVal').textContent = totalMins;
-                document.getElementById('studyMinsSplitText').textContent = `Anh: ${enMins}p • Trung: ${zhMins}p`;
+                document.getElementById('studyMinsSplitText').textContent = `Anh: ${enMins}p • Trung: ${zhMins}p • Hàn: ${krMins}p • Nhật: ${jaMins}p`;
                 const pctMins = Math.min(100, Math.round((totalMins / 120) * 100));
                 const sBar = document.getElementById('studyMinsBar');
                 sBar.style.width = `${pctMins}%`;
-                sBar.className = info.lang === 'en' ? 'progress-fill indigo' : 'progress-fill crimson';
+                sBar.className = info.lang === 'zh' ? 'progress-fill crimson' : 'progress-fill indigo';
 
-                const activeTaskId = info.lang === 'en' ? 'd_study_en' : 'd_study_zh';
+                const activeTaskId = 'd_study_' + info.lang;
                 const isDone = day.dailyCompletedIds.includes(activeTaskId);
                 const doneBtn = document.getElementById('studySyncDoneBtn');
                 doneBtn.textContent = isDone ? '✅ Đã hoàn thành buổi học' : '○ Đánh dấu hoàn thành';
@@ -4563,7 +4914,10 @@
                 let sessions = 0;
                 for (let i = 0; i < 7; i++) {
                     const dL = appState.study.logsByDate[offsetDateStr(monStr, i)];
-                    if (dL && ((Number(dL.en && dL.en.minutes) || 0) + (Number(dL.zh && dL.zh.minutes) || 0)) >= 45) sessions++;
+                    if (dL) {
+                        const daySum = (Number(dL.en && dL.en.minutes) || 0) + (Number(dL.zh && dL.zh.minutes) || 0) + (Number(dL.kr && dL.kr.minutes) || 0) + (Number(dL.ja && dL.ja.minutes) || 0);
+                        if (daySum >= 45) sessions++;
+                    }
                 }
                 document.getElementById('studyWeekSessionsText').textContent = `Tuần này: ${sessions}/6 buổi học`;
 
@@ -4625,6 +4979,14 @@
                 document.getElementById('zhSummaryInput').value = log.zh.summaryWrite || '';
                 document.getElementById('zhNoteInput').value = log.zh.note || '';
 
+                document.getElementById('krMinsInput').value = log.kr.minutes || '';
+                document.getElementById('krVocabInput').value = log.kr.vocab || '';
+                document.getElementById('krNoteInput').value = log.kr.note || '';
+
+                document.getElementById('jaMinsInput').value = log.ja.minutes || '';
+                document.getElementById('jaVocabInput').value = log.ja.vocab || '';
+                document.getElementById('jaNoteInput').value = log.ja.note || '';
+
                 const sortedZh = [...appState.study.zhMockTests].sort((a, b) => a.date.localeCompare(b.date));
                 const zhChart = document.getElementById('zhChartContainer');
                 zhChart.innerHTML = sortedZh.slice(-6).map(t => {
@@ -4653,15 +5015,56 @@
 
             function renderFlashcards() {
                 ensureStudy();
+                const lessons = appState.study.vocabLessons || [];
+                const bank = appState.study.vocabBank || [];
+
+                // Render Lesson Pills
+                const pillsContainer = document.getElementById('lessonPillsContainer');
+                const renameBtn = document.getElementById('renameLessonBtn');
+                const deleteBtn = document.getElementById('deleteLessonBtn');
+                const isCustomLesson = lessons.some(l => l.id === activeLessonFilter);
+
+                if (renameBtn) renameBtn.style.display = isCustomLesson ? 'inline-flex' : 'none';
+                if (deleteBtn) deleteBtn.style.display = isCustomLesson ? 'inline-flex' : 'none';
+
+                if (pillsContainer) {
+                    const unassignedCount = bank.filter(c => !c.lessonId || !lessons.some(l => l.id === c.lessonId)).length;
+                    let pillsHtml = `<button type="button" class="lesson-pill ${activeLessonFilter === 'all' ? 'active' : ''}" data-action="select-lesson" data-id="all">📚 Tất cả bài (${bank.length})</button>`;
+                    pillsHtml += lessons.map(l => {
+                        const cnt = bank.filter(c => c.lessonId === l.id).length;
+                        return `<button type="button" class="lesson-pill ${activeLessonFilter === l.id ? 'active' : ''}" data-action="select-lesson" data-id="${l.id}">${escHtml(l.name)} (${cnt})</button>`;
+                    }).join('');
+                    if (unassignedCount > 0) {
+                        pillsHtml += `<button type="button" class="lesson-pill ${activeLessonFilter === 'unassigned' ? 'active' : ''}" data-action="select-lesson" data-id="unassigned">📌 Chưa phân loại (${unassignedCount})</button>`;
+                    }
+                    pillsContainer.innerHTML = pillsHtml;
+                }
+
+                // Update Quick Input Lesson Dropdown
+                const quickLessonSel = document.getElementById('excelQuickLessonSelect');
+                if (quickLessonSel) {
+                    quickLessonSel.innerHTML = `<option value="">-- Chưa phân loại --</option>` + lessons.map(l =>
+                        `<option value="${l.id}" ${l.id === activeLessonFilter ? 'selected' : ''}>${escHtml(l.name)}</option>`
+                    ).join('');
+                }
+
+                const lessonScopedBank = bank.filter(c => {
+                    if (activeLessonFilter === 'all') return true;
+                    if (activeLessonFilter === 'unassigned') return !c.lessonId || !lessons.some(l => l.id === c.lessonId);
+                    return c.lessonId === activeLessonFilter;
+                });
+
                 const countAllEl = document.getElementById('fcCount_all');
-                if (countAllEl) countAllEl.textContent = appState.study.vocabBank.length;
+                if (countAllEl) countAllEl.textContent = lessonScopedBank.length;
 
                 const searchInput = document.getElementById('fcSearchInput');
                 const q = (searchInput ? searchInput.value : '').toLowerCase().trim();
-                const list = appState.study.vocabBank.filter(c => {
+                const list = lessonScopedBank.filter(c => {
                     const okFilter = fcFilter === 'all'
                         || (fcFilter === 'en' && c.lang === 'en')
                         || (fcFilter === 'zh' && c.lang === 'zh')
+                        || (fcFilter === 'kr' && c.lang === 'kr')
+                        || (fcFilter === 'ja' && c.lang === 'ja')
                         || (fcFilter === 'review' && !c.mastered);
                     const okSearch = !q || c.term.toLowerCase().includes(q) || (c.phonetic && c.phonetic.toLowerCase().includes(q)) || c.meaning.toLowerCase().includes(q);
                     return okFilter && okSearch;
@@ -4671,18 +5074,23 @@
                 if (!tbody) return;
 
                 if (list.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:18px; color:var(--text-sub); font-size:12.5px;">Chưa có từ vựng nào khớp bộ lọc. Hãy nhập ở dòng xanh phía trên hoặc bấm <strong>📋 Dán từ Excel</strong>.</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:18px; color:var(--text-sub); font-size:12.5px;">Chưa có từ vựng nào trong bài học / bộ lọc này. Hãy nhập ở dòng xanh phía trên hoặc bấm <strong>📋 Dán từ Excel</strong>.</td></tr>`;
                     return;
                 }
 
                 tbody.innerHTML = list.map((c, idx) => {
                     const displayTerm = c.phonetic ? `${c.term} (${c.phonetic})` : c.term;
+                    const lMeta = LANG_META[c.lang] || LANG_META.en;
+                    const lessonOptions = `<option value="">Chưa phân loại</option>` + lessons.map(l =>
+                        `<option value="${l.id}" ${c.lessonId === l.id ? 'selected' : ''}>${escHtml(l.name)}</option>`
+                    ).join('');
+
                     return `
                         <tr class="excel-data-row ${c.mastered ? 'row-mastered' : ''}">
                             <td style="text-align:center; font-size:11.5px; font-weight:700; color:var(--text-muted);">${idx + 1}</td>
                             <td style="text-align:center; padding:4px;">
-                                <button type="button" class="excel-lang-pill ${c.lang}" data-action="toggle-row-lang" data-id="${c.id}" title="Bấm để đổi Anh / Trung">
-                                    ${c.lang === 'en' ? '🇬🇧 EN' : '🇨🇳 ZH'}
+                                <button type="button" class="excel-lang-pill ${c.lang}" data-action="toggle-row-lang" data-id="${c.id}" title="Bấm để đổi Anh / Trung / Hàn / Nhật">
+                                    ${lMeta.pill}
                                 </button>
                             </td>
                             <td>
@@ -4698,6 +5106,9 @@
                                     data-excel-id="${c.id}"
                                     data-excel-field="meaning"
                                     value="${escHtml(c.meaning)}">
+                            </td>
+                            <td style="padding:2px;">
+                                <select class="excel-lesson-select" data-card-lesson-id="${c.id}">${lessonOptions}</select>
                             </td>
                             <td style="text-align:center; padding:4px; white-space:nowrap;">
                                 <button type="button" class="btn btn-sm ${c.mastered ? 'btn-sage-soft' : ''}" style="padding:4px 7px;" data-action="toggle-fc-mastered" data-id="${c.id}" title="${c.mastered ? 'Đã thuộc' : 'Đánh dấu đã thuộc'}">
@@ -4990,6 +5401,7 @@
                 const slot = document.getElementById('aiTargetMealSlot').value;
                 const day = ensureDay(appState.currentDate);
                 pendingAiItems.forEach(it => day.meals[slot].push(it));
+                touchDayModified(appState.currentDate);
                 saveState();
                 renderAll();
                 closeModal('aiScannerModal');
@@ -5017,7 +5429,7 @@
                 reader.onload = function(e) {
                     try {
                         const imported = JSON.parse(e.target.result);
-                        mergeStates(appState, imported);
+                        mergeStates(appState, imported, false);
                         saveState();
                         renderAll();
                         showToast('Đã khôi phục và gộp dữ liệu thành công!');
@@ -5033,6 +5445,7 @@
             let fbAuth = null;
             let fbUnsubscribe = null;
             let cloudDebounceTimer = null;
+            let isApplyingRemoteSnapshot = false;
 
             function getSyncUid() {
                 let uid = localStorage.getItem('pcos_custom_sync_uid');
@@ -5125,21 +5538,23 @@
                 fbUnsubscribe = docRef.onSnapshot(snap => {
                     document.getElementById('cloudSyncSubtitle').textContent = `☁️ Đã đồng bộ đám mây (${uid.slice(0, 12)})`;
                     document.getElementById('modalCloudStatusBadge').textContent = `☁️ Đang đồng bộ (${uid})`;
-                    if (snap.exists) {
+                    if (snap.exists && !snap.metadata.hasPendingWrites) {
                         const remoteData = snap.data().payload;
                         if (remoteData) {
-                            mergeStates(appState, remoteData);
+                            isApplyingRemoteSnapshot = true;
+                            mergeStates(appState, remoteData, true);
                             saveState(false);
                             renderAll();
+                            isApplyingRemoteSnapshot = false;
                         }
-                    } else {
+                    } else if (!snap.exists) {
                         docRef.set({ payload: appState, updatedAt: Date.now() }, { merge: true });
                     }
                 });
             }
 
             function pushToCloudDebounced() {
-                if (!fbDb) return;
+                if (!fbDb || isApplyingRemoteSnapshot) return;
                 clearTimeout(cloudDebounceTimer);
                 cloudDebounceTimer = setTimeout(() => {
                     const uid = (fbAuth && fbAuth.currentUser && fbAuth.currentUser.uid) || getSyncUid();
@@ -5147,7 +5562,7 @@
                         payload: appState,
                         updatedAt: Date.now()
                     }, { merge: true }).catch(() => {});
-                }, 900);
+                }, 450);
             }
 
             async function signInWithGoogleFirebase() {
@@ -5232,7 +5647,7 @@
                     document.head.appendChild(mLink);
 
                     if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
-                        const swCode = "const CACHE_NAME='pcos-balance-offline-v2';self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(['./']).catch(()=>{})));});self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(res=>{const copy=res.clone();caches.open(CACHE_NAME).then(c=>c.put(e.request,copy)).catch(()=>{});return res;}).catch(()=>caches.match(e.request)));});";
+                        const swCode = "const CACHE_NAME='pcos-balance-offline-v3';self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(['./']).catch(()=>{})));});self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(res=>{const copy=res.clone();caches.open(CACHE_NAME).then(c=>c.put(e.request,copy)).catch(()=>{});return res;}).catch(()=>caches.match(e.request)));});";
                         const swBlob = new Blob([swCode], { type: 'application/javascript' });
                         navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(() => {});
                     }
@@ -5376,6 +5791,9 @@
                         case 'add-steps':
                             addSteps(parseInt(btn.dataset.steps, 10) || 500);
                             break;
+                        case 'save-manual-steps':
+                            setManualSteps(true);
+                            break;
                         case 'add-workout':
                             addWorkoutEntry();
                             break;
@@ -5429,6 +5847,18 @@
                             break;
                         case 'delete-hsk-test':
                             deleteHskTest(btn.dataset.id);
+                            break;
+                        case 'select-lesson':
+                            selectLessonFilter(btn.dataset.id);
+                            break;
+                        case 'create-lesson':
+                            createNewLesson();
+                            break;
+                        case 'rename-lesson':
+                            renameActiveLesson();
+                            break;
+                        case 'delete-lesson':
+                            deleteActiveLesson();
                             break;
                         case 'open-bulk-paste':
                             openBulkPasteModal();
@@ -5540,6 +5970,10 @@
                         toggleOnceTask(t.dataset.id);
                         return;
                     }
+                    if (t.dataset && t.dataset.cardLessonId) {
+                        updateCardLesson(t.dataset.cardLessonId, t.value);
+                        return;
+                    }
                     if (t.dataset && t.dataset.aiIdx !== undefined) {
                         const idx = parseInt(t.dataset.aiIdx, 10);
                         const field = t.dataset.aiField;
@@ -5569,7 +6003,7 @@
                             saveBodyMetrics();
                             break;
                         case 'stepsManualInput':
-                            setManualSteps();
+                            setManualSteps(true);
                             break;
                         case 'workoutPresetSelect':
                             recalcWorkoutEstKcal();
@@ -5587,6 +6021,16 @@
                         case 'zhSummaryInput':
                         case 'zhNoteInput':
                             saveStudyLog('zh', false);
+                            break;
+                        case 'krMinsInput':
+                        case 'krVocabInput':
+                        case 'krNoteInput':
+                            saveStudyLog('kr', false);
+                            break;
+                        case 'jaMinsInput':
+                        case 'jaVocabInput':
+                        case 'jaNoteInput':
+                            saveStudyLog('ja', false);
                             break;
                         case 'zhCumVocabInput':
                             updateZhCumVocabManual();
@@ -5627,6 +6071,9 @@
                         } else if (t.id === 'newTaskText') {
                             e.preventDefault();
                             addNewTask();
+                        } else if (t.id === 'stepsManualInput') {
+                            e.preventDefault();
+                            setManualSteps(true);
                         } else if (t.id === 'excelColTermInput') {
                             e.preventDefault();
                             const col2 = document.getElementById('excelColMeaningInput');
